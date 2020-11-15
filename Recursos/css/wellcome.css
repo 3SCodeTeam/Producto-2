@@ -1,0 +1,21 @@
+body{
+    padding: 20em;
+}
+.main-container{
+    display: block;
+    text-align: center;
+}
+#wellcome-msg{
+    border: solid black;    
+    font-size: large;
+    text-align: center;
+    padding: 2em;
+}
+#wellcome-msg h3{
+    font-size: xx-large;
+}
+a{
+    margin: 1em;
+    font-size: x-large;
+
+}

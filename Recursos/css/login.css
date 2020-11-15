@@ -1,0 +1,30 @@
+.main-container{
+    text-align: center;
+    padding: 20em;
+}
+form div input {
+    font-size: x-large;
+    margin: 1ex;
+}
+.selector-container select{
+    font-size: x-large;
+    margin: 1ex 1ex 3ex 1ex;
+
+}
+
+h1{
+    font-size: xx-large;
+}
+/*¿¿¿¿¿¿¿Trasladar a style.css????*/
+input[type="Submit"]{
+    padding: 1px;
+    color: white;
+    background-color: red;
+    width: 200px;
+    margin: auto;
+    border-radius: 25%;    
+}
+input[type="Submit"]:hover{
+    background-color: red;
+    color: black;
+}
