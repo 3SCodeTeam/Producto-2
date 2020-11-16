@@ -1,21 +1,33 @@
-body{
-    padding: 20em;
-}
 .main-container{
+    margin-top: 10em;
     display: block;
     text-align: center;
 }
-#wellcome-msg{
-    border: solid black;    
+
+#wellcome-msg{        
     font-size: large;
     text-align: center;
-    padding: 2em;
 }
-#wellcome-msg h3{
-    font-size: xx-large;
+#wellcome-msg h1{
+    font-size: 8em;
+    margin-bottom: 0.5em;
 }
-a{
-    margin: 1em;
-    font-size: x-large;
 
+.button-href{
+    display: inline-block;        
+    margin: 0 5em 0 5em;    
+    background: red ;    
+    border: black solid 2px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 350px;
+}
+.button-href a{
+    font-size: x-large;
+    text-decoration: none; 
+    color: white;
+}
+.button-href{    
+    border: black;
+    color: black;
 }

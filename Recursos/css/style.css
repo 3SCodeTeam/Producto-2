@@ -1,3 +1,20 @@
+header a{    
+    color: red;
+    font-size: xx-large;    
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;    
+    text-align: center;
+}
+header div{    
+    display: block;
+    margin-top: 0.5em;    
+    position: relative;
+    top:0;    
+    padding: 1em;
+    border-bottom: red solid thin;
+}
+
+
 footer{
     font-family: 'Times New Roman', Times, serif;
     font-size: medium;
@@ -12,6 +29,28 @@ footer{
 }
 
 body{
+    display: block;
     font-family: Arial, Helvetica, sans-serif;
     font-size: medium;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding:0
 }
+    /*¿¿¿¿¿¿¿Trasladar a style.css????*/
+input[type="Submit"]{
+    display: inline-block;
+    padding: 3px;
+    color: white;
+    background-color: red;
+    width: 250px;
+    margin: 10px auto;
+    border-radius: 20px;    
+}
+
+input[type="Submit"]:hover{
+    background-color: red;
+    color: black;
+    border: solid 2px black;
+}
+

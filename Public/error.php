@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <header>
+    <head>
         <meta charset="utf-8">
         <title>3SCode Academy Manager</title>       
         <link rel="stylesheet" href="/Recursos/css/style.css">
         <link rel="stylesheet" href="/Recursos/css/error.css">
-    </header>
+    </head>
     <body>
+    <?php include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\header.html"); ?>
         <div>
             <h1>ERROR 401</h1>    
         </div>
+        <?php
     </body>
 </html>
 

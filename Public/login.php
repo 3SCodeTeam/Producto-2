@@ -1,4 +1,10 @@
-<? php
+<?php
+    require("G:\\repos\\UOC\\3SCode\\Producto2\\Modulos\\db\\database.php");
+
+    $prueba = new DataManager();
+    $prueba -> dbConnect();    
+    echo $prueba -> get_Estudiantes();
+
 ?>
 
 <!DOCTYPE html>
@@ -10,8 +16,15 @@
         <link rel="stylesheet" href="/Recursos/css/login.css"> 
     </head>
     <body>
+    <?php
+    require("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\header.html");
+    /* include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\header.html"); */
+    ?>
         <div class= "main-container">
-            <h1>Iniciar Sesión<h1>
+            <div>
+                <h1>Inicia sesión</h1>
+                <span>o <a href="http://localhost/public/signin.php">Registrate</a></span>
+            </div>
             <div class="form-container">
             <div class="selector-container">
                 <label for="rol">Perfil:</label>
@@ -29,6 +42,6 @@
                 </form>                
             </div>
         </div>
+        <?php include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\footer.html"); ?>
     </body>
-    <?php include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\footer.html"); ?>
 </html>

@@ -7,16 +7,17 @@
         <link rel="stylesheet" href="/Recursos/css/wellcome.css"> 
     </head>
     <body>
-        <div class="main-container">
-            <h1>3SCode Academy Manager</h1> 
+    <?php include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\header.html"); ?>
+        <div class="main-container">            
             <div id="wellcome-msg">
-                <h3>Bienvenido</h3>
+                <div><h1>Bienvenido</h1><div>
             <div>
                 <span>
-                    <a href="http://localhost/public/registrarse.php">Registrate</a>  <a href="http://localhost/public/login.php">Inicia sesión</a>
+                    <div class="button-href"><a href="http://localhost/public/signin.php">Registrate</a></div>
+                    <div class="button-href"><a href="http://localhost/public/login.php">Inicia sesión</a></div>
                 </span>
             </div>            
-        </div>        
-    </body>     
-    <?php include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\footer.html"); ?>
+        </div>
+        <?php include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\footer.html"); ?>      
+    </body>         
 </html>

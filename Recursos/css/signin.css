@@ -1,0 +1,30 @@
+
+.main-container{
+    display: block;
+    text-align: center;    
+    width: 100%;
+    margin: 0;    
+}
+h1{    
+    font-size: xx-large;
+    margin-top: 1em;
+}
+form div{
+    display: inline-block;
+    text-align: center;
+}
+input{
+    display: block;
+    padding: 20px;
+    margin: 20px;
+    width: 750px;
+    border: red solid;
+}
+
+div span{
+    font-size: medium;
+}
+
+a{
+    color:red;        
+}

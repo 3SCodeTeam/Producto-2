@@ -2,7 +2,7 @@
 
 //ESTE PARTE DEL CÓDIGO DEBE ADAPTARSE A CADA SERVIDOR
 /* ################################################# */
-$path = '\repos\UOC\3SCode\Producto2\Modules';
+$path = '\repos\UOC\3SCode\Producto2\Modulos';
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 $path = '\repos\UOC\3SCode\Producto2\Public';
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
