@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/Recursos/css/wellcome.css"> 
     </head>
     <body>
-    <?php include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\header.html"); ?>
+    <?php include("assets\\html\\header.html"); ?>
         <div class="main-container">            
             <div id="wellcome-msg">
                 <div><h1>Bienvenido</h1><div>
@@ -18,6 +18,6 @@
                 </span>
             </div>            
         </div>
-        <?php include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\footer.html"); ?>      
+        <?php include("assets\\html\\footer.html"); ?>      
     </body>         
 </html>

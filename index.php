@@ -12,9 +12,12 @@ set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
 // Include router class
 include('router.php');
-
-
 session_start();
+
+$req = parse_url($_SERVER['REQUEST_URI']);
+echo implode($req);
+
+echo ($_SERVER['REQUEST_URI']);
 
 if ( isset( $_SESSION['user_id'] ) ) {
 

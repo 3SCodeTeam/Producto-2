@@ -2,10 +2,8 @@
 
 include 'includes/autoloader.inc.php';
 
-class DBconn extends Dbconfig{
+class DBconnection extends Dbconfig{
 
-    protected $connection;
-    
     protected $conn;
     protected $db;
     protected $host;
@@ -23,21 +21,27 @@ class DBconn extends Dbconfig{
     }
     
     function dbDisconnect() {
-        $this -> connection = NULL;
+        $this -> conn = NULL;
         $this -> db = NULL;
         $this -> host = NULL;
         $this -> user = NULL;
         $this -> pass = NULL;
     }
 
-    public function dbConn() {
+    protected function dbConn() {
         try{
-            $this -> connection = new mysqli($this -> host,$this -> user,$this -> pass,$this -> db);            
+            $this -> conn = new mysqli($this -> host,$this -> user,$this -> pass,$this -> db);                    
         }catch (Exception $e) {
             echo $e; //Gestionar el error.
         }finally{
+            die($this->conn->connect_error);
             dbDisconnect();
-        }      
+        }
+    }
+
+    public function getConn()
+    {
+        return $this->conn;
     }
 }
 ?>

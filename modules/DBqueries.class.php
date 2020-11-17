@@ -1,17 +1,19 @@
 <?php
-namespace database;
 include 'includes/autoloader.inc.php';
 
-class DBqueries extends DBconn{
+class DBqueries extends DBconnection{
     private $table;
     private $db;
     private $conn;
     
 
     public function _construct($table){
-        $this -> table = (string) $table;        
-        $this -> dataSet = NULL;      
-        $this -> conn = new DBconn();
+        $this -> table = (string) $table;            
+        $dbconnection = new DBconnection();
+        $this->conn = $dbconnection->dbconn()
+    }
+    public function __destructor(){ //Destructor ???
+        $this->conn->close();   //Cerrar conexión???
     }
 
     function dataToArray($result){
