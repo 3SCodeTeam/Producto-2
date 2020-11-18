@@ -10,7 +10,7 @@ class DBqueries extends DBconnection{
     public function _construct($table){
         $this -> table = (string) $table;            
         $dbconnection = new DBconnection();
-        $this->conn = $dbconnection->dbconn()
+        $this->conn = $dbconnection->dbconn();
     }
     public function __destructor(){ //Destructor ???
         $this->conn->close();   //Cerrar conexión???
