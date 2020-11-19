@@ -1,7 +1,7 @@
 <?php
 include 'includes/autoloader.inc.php';
 
-class student{
+class Student{
     
     private $date_registred;
     private $email;

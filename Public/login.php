@@ -1,19 +1,10 @@
-<?php
-    require("G:\\repos\\UOC\\3SCode\\Producto2\\Modulos\\db\\database.php");
-
-    $prueba = new DataManager();
-    $prueba -> dbConnect();    
-    echo $prueba -> get_Estudiantes();
-
-?>
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>Iniciar Sesión</title>
-        <link rel="stylesheet" href="/Recursos/css/style.css">
-        <link rel="stylesheet" href="/Recursos/css/login.css"> 
+        <link rel="stylesheet" href="Recursos/css/style.css">
+        <link rel="stylesheet" href="Recursos/css/login.css"> 
     </head>
     <body>
     <?php
@@ -34,7 +25,7 @@
                     <option value="Admin">Administrador</option>                                
                 </select>                        
             </div>
-                <form action="public/login.php" method="post" form="login">
+                <form action="/?controller=login&method=post" method="post" form="login">
                     <div><input type="text" name="username" placeholder="Nombre de usuario" required></div>
                     <div><input type="text" name="email" placeholder="Email" required></div>
                     <div><input type="password" name="pass" placeholder="Contraseña" required></div>                    

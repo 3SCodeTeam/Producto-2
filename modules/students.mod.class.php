@@ -1,25 +1,18 @@
 <?php
 include 'includes/autoloader.inc.php';
 
-class Students extends DBconn{
+class Students extends DBqueries{
     
     private $conn;
-    private $id;
-    private $username;
-    private $password;
-    private $name;    
-    private $telephone;
-    private $nif;
-    private $date_registered;
 
-    public function _constructor(){
+    public function __construct(){
+        paren::_contruct('students');
         $dbconnection = new DBconnection();
         $this->conn = $dbconnection->dbconn();
-
     }
 
     public function getAll(){        
-        $sql = 'SELECT * FROM students';
+        $sql = 'SELECT * FROM students ORDER BY id';
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -29,26 +22,7 @@ class Students extends DBconn{
         d - double
         s - string
         b - BLOB
-    */
-
-    //SELECT
-    public function getByAttribute($col, $val){
-        $sql = $this->conn->prepare('SELECT * FROM students WHERE ? = ?');
-        $sql->bind_param('ss', $col, $val);
-        $sql->close();
-        $result = $sql->execute();
-        return $result;
-    }
-
-    public function getByAttributes($col1, $col2, $val1, $val2, string $operator){
-        $sql = $this->conn->prepare('SELECT * FROM students WHERE ? = ? ? ? = ?');
-        $sql->bind_param('ssss', $col1, $val1,$operator,$col2,$val2);
-        $sql->close();
-        $result = $sql->execute();
-        return $result;
-    }
-
-    //ATENCIÓN LOS DOS MËTODOS ANTEORIORES SON COMUNES A TODOS LOS MODULOS. MEJOR MOVERLOS A DBqueries.class.php
+    */ 
 
     public function getById(int $id){
         $sql = $this->conn->prepare('SELECT * FROM students WHERE id = ?');
@@ -89,15 +63,7 @@ class Students extends DBconn{
         $sql->close();
         return $result->affected_rows;
     }
-
-    // ATENCIÓN: ESTOS MÉTODOS A LO MEJOR LOS PASAMOS A DBqueries.class.php POR QUE SON COMUNES A TODAS LAS TABLAS.
-    //UPDATE int $mysqli->affected_rows;
-    public function updateValue($attribute, $new_value, $col, $val){
-        $sql = $his->conn->prepare('UPDATE students SET ? = ? WHERE ? = ?');
-        $result = $sql->bind_param('ssss', $attribute, $new_value, $col, $val);
-        $sql->close();       
-        return $result->affected_rows;
-    }
+    
     public function updateValueById($attribute, $new_value, $id){
         $sql = $his->conn->prepare('UPDATE students SET ? = ? WHERE id = ?');
         $result = $sql->bind_param('ssss', $attribute, $new_value, $id);

@@ -1,62 +1,21 @@
 <?php
+include_once 'includes/autoLoader.inc.php';
 
-//ESTE PARTE DEL CÓDIGO DEBE ADAPTARSE A CADA SERVIDOR
-/* ################################################# */
-$path = '\repos\UOC\3SCode\Producto2\Modulos';
-set_include_path(get_include_path() . PATH_SEPARATOR . $path);
-$path = '\repos\UOC\3SCode\Producto2\Public';
-set_include_path(get_include_path() . PATH_SEPARATOR . $path);
-$path = '\repos\UOC\3SCode\Producto2\Recursos';
-set_include_path(get_include_path() . PATH_SEPARATOR . $path);
-/* ################################################# */
+#session_start();
+//El controlador y la acción del controlador se pasan en la URL. http://localhost/index.php?controller=controllerName&action=ActionName
+//¿¿¿Controlamos el inicio de sessión en este punto con la variable $SESSIONS???
 
-// Include router class
-include('router.php');
-session_start();
-
-$req = parse_url($_SERVER['REQUEST_URI']);
-echo implode($req);
-
-echo ($_SERVER['REQUEST_URI']);
-
-if ( isset( $_SESSION['user_id'] ) ) {
-
-    //Todo las rutas que se ejecutan a partir de aquí deben ser para usuarios que han iniciado sesión.
-
-    // Página de inicio.
-    Route::add('/',function(){
-        echo 'Welcome :-)';
-    });
-
-    // Simple test route that simulates static html file
-    Route::add('/test',function(){
-        require 'test.php';
-        #echo 'Hello from test.php';
-    });
-
-    // Post route example
-    Route::add('/contact-form',function(){
-        echo '<form method="post"><input type="text" name="test" /><input type="submit" value="send" /></form>';
-    },'get');
-
-    // Post route example
-    Route::add('/contact-form',function(){
-        echo 'Hey! The form has been sent:<br/>';
-        print_r($_POST);
-    },'post');
-
-    // Accept only numbers as parameter. Other characters will result in a 404 error
-    Route::add('/foo/([0-9]*)/bar',function($var1){
-        echo $var1.' is a great number!';
-    });
-
-    Route::run('/');
+if (isset($_GET['controller'])&&isset($_GET['method'])) {
+    $route = new Therouter($_GET['controller'], $_GET['method']);
+    $route -> call();
 } else {
-
-    //ATENCIÓN LA REDIRECCIÓN ESTÁNDAR HTTP ES AL PUERTO 80.
-    //ES NECESARIO ESPECIFICAR EL PUERTO SI SE HA MODIFICADO EN XAMPP.
+    //Acción predeterminada si no se le pasa un controlador y acción en la ruta ó no se ha iniciado sessión.
+    //Este controlador no debe controlar que exista sessión.
     
-    header("Location: http://localhost/public/wellcome.php");
+    $route = new Therouter('login', 'new');
+    $route -> call();
 }
-/*<!--https://steampixel.de/en/simple-and-elegant-url-routing-with-php/-->*/
+//carga la vista layout.php
+#require_once('Views/layout.php');
+
 ?>
