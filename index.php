@@ -6,13 +6,13 @@ include_once 'includes/autoLoader.inc.php';
 //¿¿¿Controlamos el inicio de sessión en este punto con la variable $SESSIONS???
 
 if (isset($_GET['controller'])&&isset($_GET['method'])) {
-    $route = new Therouter($_GET['controller'], $_GET['method']);
+    $route = new Router($_GET['controller'], $_GET['method']);
     $route -> call();
 } else {
     //Acción predeterminada si no se le pasa un controlador y acción en la ruta ó no se ha iniciado sessión.
     //Este controlador no debe controlar que exista sessión.
-    
-    $route = new Therouter('login', 'new');
+
+    $route = new Router('login', 'new');
     $route -> call();
 }
 //carga la vista layout.php
