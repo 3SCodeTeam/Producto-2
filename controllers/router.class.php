@@ -20,8 +20,25 @@ class Router{
                 require_once('controllers/'.$this->controller.'.ctrl.php');
                 $this->controller = new LogInController();
                 break;
+            case 'register':
+                break;
+            case 'student':
+                if(!isset($_SESSION['user_id'])){
+                    return $this->callErr('Debes iniciar sesión.');
+                }
+            break;
+            case 'teacher':
+            break;
+            case 'admin':
+            break;
         }        
         $this->controller->{$this->method}();
+    }
+
+    private function callErr($msg=NULL){
+        require_once('controllers/logIn.ctrl.php');
+        $controller = new LogInController();
+        return $controller->error($msg);
     }
 }
 ?>

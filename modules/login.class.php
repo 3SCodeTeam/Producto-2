@@ -24,6 +24,7 @@ class LogInChecker{
         $this->user_data = $this->getUserData();
         if($this -> user_data != 0){
             if($this->userExist()&&$this->passMatch()){
+               $_SESSION['user_id']=password_hash($this->email, PASSWORD_DEFAULT);
                 return require_once('public/posttest.php');
             }
         }
