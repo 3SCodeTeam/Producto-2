@@ -1,7 +1,7 @@
 <?php
 
 #include 'includes/MODs.autoloader.inc.php';
-include 'DBconfig.class.php';
+include_once 'DBconfig.class.php';
 class DBconnection extends Dbconfig{
 
     protected $conn;
@@ -30,18 +30,13 @@ class DBconnection extends Dbconfig{
 
     public function dbConn() {
         try{
-            $this -> conn = new mysqli($this -> host,$this -> user,$this -> pass,$this -> db);                    
+            $this -> conn = new mysqli($this -> host,$this -> user,$this -> pass,$this -> db);                                
         }catch (Exception $e) {
             echo $e; //Gestionar el error.
-        }finally{
             die($this->conn->connect_error);
-            dbDisconnect();
+        }finally{
+            return $this->conn;
         }
-    }
-
-    public function getConn()
-    {
-        return $this->conn;
     }
 }
 ?>

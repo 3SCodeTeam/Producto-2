@@ -2,8 +2,26 @@
 
 spl_autoload_register('modsAutoloader');
 spl_autoload_register('ctrlAutoloader');
+spl_autoload_register('classAutoloader');
 
 function modsAutoloader($className){
+    $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $path = "modules/";
+    $extension = ".mod.class.php";
+    $fullpath =$path.$className.$extension;
+
+    if(strpos($url, 'includes') !== false){
+        $path = '../modules/';
+    }
+    else{
+        $path = 'modules/';
+    }
+
+    if(!file_exists($fullpath)){
+        return false;
+    }
+}
+function classAutoloader($className){
     $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     $path = "modules/";
     $extension = ".class.php";

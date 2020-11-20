@@ -19,4 +19,4 @@ ErrorDocument 400 /errors/400.html
 ErrorDocument 500 /errors/500.html
 ErrorDocument 404 /errors/404.html
 
-php_value include_path ".;G:\\repos\\UOC\\3SCode\\Producto2;G:\\repos\\UOC\\3SCode\\Producto2\includes;G:\\repos\\UOC\\3SCode\\Producto2\\modules;G:\\repos\\UOC\\3SCode\\Producto2\\controllers"
+php_value include_path ".;G:\\repos\\UOC\\3SCode\\Producto2;G:\\repos\\UOC\\3SCode\\Producto2\includes;G:\\repos\\UOC\\3SCode\\Producto2\\modules;G:\\repos\\UOC\\3SCode\\Producto2\\controllers;G:\\repos\\UOC\\3SCode\\Producto2\\views"

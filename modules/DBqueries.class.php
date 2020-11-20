@@ -1,9 +1,15 @@
 <?php
-include 'includes/autoloader.inc.php';
+include_once 'includes/autoloader.inc.php';
 
 class DBqueries{
     private $table;
     private $conn;
+    
+    public function __construct($table){        
+        $this -> table = (string) $table;        
+        $dbconnection = new DBconnection();
+        $this->conn = $dbconnection->dbconn();        
+    }    
 
     public function getTable()
     {
@@ -14,12 +20,6 @@ class DBqueries{
         $this->table = $table;
 
         return $this;
-    }
-
-    public function __construct($table){
-        $this -> table = (string) $table;            
-        $dbconnection = new DBconnection();
-        $this->conn = $dbconnection->dbconn();
     }
     
     function dataToArray($result){

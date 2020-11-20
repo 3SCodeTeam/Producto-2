@@ -28,3 +28,10 @@ div span{
 a{
     color:red;        
 }
+
+.errmsg{
+    margin-top: 55px;
+    color:red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+}

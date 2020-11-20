@@ -18,7 +18,7 @@ class Router{
         switch($this->controller){
             case 'login':                
                 require_once('controllers/'.$this->controller.'.ctrl.php');
-                $this->controller = new LogIn();
+                $this->controller = new LogInController();
                 break;
         }        
         $this->controller->{$this->method}();

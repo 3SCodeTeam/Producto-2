@@ -7,9 +7,8 @@
         <link rel="stylesheet" href="Recursos/css/login.css"> 
     </head>
     <body>
-    <?php
-    require("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\header.html");
-    /* include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\header.html"); */
+    <?php    
+    require("Recursos/html/header.html");
     ?>
         <div class= "main-container">
             <div>
@@ -32,7 +31,11 @@
                     <div><input type="submit" value="Enviar"></div>
                 </form>                
             </div>
+            <?php
+                require_once('login.var.php');
+                if(isset(LogInvar::$errormsg)){echo('<div class="errmsg">'.LogInvar::$errormsg.'</div>');}
+                ?>
         </div>
-        <?php include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\footer.html"); ?>
+        <?php include("Recursos/html/footer.html"); ?>
     </body>
 </html>

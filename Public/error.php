@@ -10,8 +10,7 @@
     <?php include("G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\html\\header.html"); ?>
         <div>
             <h1>ERROR 401</h1>    
-        </div>
-        <?php
+        </div>  
     </body>
 </html>
 

@@ -1,16 +1,24 @@
 <?php
-
-class LogIn{
+require_once('views/login.var.php');
+class LogInController{
 
     public function __construct(){
 
     }
 
     public function new(){
-        require_once("public/login.php");
+        require_once("views/login.view.php");
     }
-    public function post(){
-        require_once('public\posttest.php');
+    public function post(){        
+        require_once('modules/login.class.php');        
+        $controller = new LogInChecker();        
+        $controller -> checkUser();
+    }
+    public function error($errmsg=NULL){
+        if(isset($errmsg)){
+            LogInvar::$errormsg = $errmsg;
+        }
+        require_once('views/login.view.php');
     }
 }
 ?>

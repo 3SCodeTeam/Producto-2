@@ -16,7 +16,7 @@
                     <?php
                         foreach($_POST as $data){
                             echo('<div>'. $data.'</div>');
-                        }
+                        }                        
                     ?>
                 </span>
             </div>            
