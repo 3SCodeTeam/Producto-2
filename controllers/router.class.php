@@ -28,8 +28,20 @@ class Router{
                 }
             break;
             case 'teacher':
+                if(!isset($_SESSION['user_id'])){
+                    return $this->callErr('Debes iniciar sesión.');
+                }
             break;
             case 'admin':
+                if(!isset($_SESSION['user_id'])){
+                    return $this->callErr('Debes iniciar sesión.');
+                }
+            break;
+            case 'error':
+                //ENVIAR A PÁGINA DE ADVERTENCIA
+            break;
+            default:
+                //ENVIAR A PÁGINA DE ERROR
             break;
         }        
         $this->controller->{$this->method}();
