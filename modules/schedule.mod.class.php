@@ -1,7 +1,7 @@
 <?php
 include 'includes/autoloader.inc.php';
 
-class schedule extends DBconn {
+class schedule extends DBconnection {
     private $conn;
     private $id_schedule;
     private $id_class;

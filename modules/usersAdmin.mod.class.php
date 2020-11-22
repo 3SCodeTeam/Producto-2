@@ -1,7 +1,7 @@
 <?php
 include 'includes/autoloader.inc.php';
 
-class usersAdmin extends DBconn {
+class usersAdmin extends DBconnection {
     private $conn;
     private $id_user_admin;
     private $username;
