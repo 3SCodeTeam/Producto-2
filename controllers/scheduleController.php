@@ -5,6 +5,7 @@ class scheduleController extends schedule {
     // Funcion insertar horarios para todo el curso en funcion dia semana
     public function insertScheduleAuto() {
         $date = '2020-09-01'; // guardamos fecha inicio curso
+        
         while ($date <= '2021-06-30') { // condicion fecha fin curso
             $day = date('l', strtotime($date));
             switch ($day) {
@@ -28,6 +29,7 @@ class scheduleController extends schedule {
         }
     }
 
+    // Funcion horario Monday
     public function mondaySchedule() {
         $hora = []; // declaramos array para las 6 horas diarias
         $hora[0] = 'Programacion';
