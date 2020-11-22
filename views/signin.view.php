@@ -6,8 +6,8 @@
     <head>
         <meta charset="utf-8">
         <title>3SCode Academy Manager</title>
-        <link rel="stylesheet" href="Recursos/css/style.css">
-        <link rel="stylesheet" href="Recursos/css/signin.css"> 
+        <link rel="stylesheet" href="recursos/css/style.css">
+        <link rel="stylesheet" href="recursos/css/signin.css"> 
     </head>
     <body>
     <?php require("Recursos/html/header.html");?>
