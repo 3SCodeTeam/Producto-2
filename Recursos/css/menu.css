@@ -1,0 +1,18 @@
+.menu-items-cont{
+    background-color: tomato;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+
+    display: block;
+    height: 40px;
+    width: 100%;
+}
+.item{
+    padding: 1px;
+    display: inline;
+    width: auto;
+    height: 30px;
+    margin: 6px;
+    vertical-align: middle;
+    font-size: x-large;
+}

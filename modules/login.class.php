@@ -26,10 +26,19 @@ class LogInChecker{
         if($this->user_data != 0){            
             if($this->userExist()&&$this->passMatch()){
                $_SESSION['user_id']=password_hash($_POST['pass'], PASSWORD_BCRYPT);
-                return require_once('public/posttest.php');
+               return $this->callUserTemplate();
             }
         }
-        return $this->errorMsg('Wrong user or password.');
+        return $this->errorMsg('Usuario y/o contraseña incorrectos.');
+    }
+
+    private function callUserTemplate(){
+        switch($this->tipo){
+            case 'student': return require_once('views/student.view.php');
+            case 'teacher': return require_once('views/teacher.view.php');
+            case 'admin': return require_once('views/admin.view.php');
+            default: return $this->errorMesg('Tipo de usuario incorrecto.');
+        }
     }
 
     private function getUserData(){
