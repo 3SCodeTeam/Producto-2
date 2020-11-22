@@ -15,17 +15,17 @@ class LogInChecker{
     public function __construct(){
         $this->name = $_POST['username'];
         $this->email= $_POST['email'];
-        $this->pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+        $this->pass = crypt($_POST['pass'],'$6$Nodejesquemeentiendan.Guardameelsecreto.');
         $this->tipo = $_POST['rol_option'];  
         
     }
 
     public function checkUser(){    
-        $this->user_data = $this->getUserData();
-        
-        if($this -> user_data != 0){            
+        $this->user_data = $this->getUserData();        
+        //var_dump($this->user_data);
+        if($this->user_data != 0){            
             if($this->userExist()&&$this->passMatch()){
-               $_SESSION['user_id']=rand(999999999, 999999999999);
+               $_SESSION['user_id']=password_hash($_POST['pass'], PASSWORD_BCRYPT);
                 return require_once('public/posttest.php');
             }
         }
@@ -46,16 +46,17 @@ class LogInChecker{
         }
     }
     private function userExist(){
-        if($this->user_data == 0 || !isset($this->user_data)){
+        if(!isset($this->user_data[0]->id)){            
             return false;
         }
         return true;
     }
-    private function passMatch(){             
-        if($this->user_data->user->pass === $this->pass){
-            true;
+    private function passMatch(){
+        //var_dump($this->user_data[0]->pass === $this->pass);
+        if($this->user_data[0]->pass === $this->pass){
+            return true;
         }
-        false;
+        return false;
     }
     private function errorMsg($msg=NULL){
         require_once('controllers/logIn.ctrl.php');

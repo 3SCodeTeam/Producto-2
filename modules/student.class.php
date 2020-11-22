@@ -3,7 +3,7 @@ include_once 'includes/autoloader.inc.php';
 
 class Student{
     
-    public $date_registred;
+    public $date_registered;
     public $email;
     public $id;
     public $name;

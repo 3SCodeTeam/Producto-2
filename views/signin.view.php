@@ -19,7 +19,7 @@
             <form action="http://localhost/?controller=signin&method=post" method="post">
                 <div class="signin-form-input">
                 <input class="signin-form-input" type="text" name="username" placeholder="Nombre de usuario" required/>
-                <input class="signin-form-input" type="text" name="email" placeholder="Email" required/>
+                <input class="signin-form-input" type="email" name="email" placeholder="Email" required/>
                 <input class="signin-form-input" type="password" name="password" placeholder="Contraseña" required/>
                 <input class="signin-form-input" type="password" name="password_check" placeholder="Confirmar la contraseña" required/>
                 </div>

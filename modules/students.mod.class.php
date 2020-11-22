@@ -12,35 +12,41 @@ class Students extends DBqueries{
         $this->conn = $dbconnection->dbconn();        
         
     }
-    Function transformData($res){                
-        if(isset($res) && $res!='err'){
-            $numRows= $res->num_rows;            
-        }else{
-            $numRows = 0;
-        }
-        if($numRows > 0){
-            while($row = $res -> fetch_assoc()){
-                $user = new Student();
-                $user->id = $row['id'];
-                $user->date_registred = $row['date_registered'];                
-                $user->email = $row['email'];
-                $user->id = $row['name'];
-                $user->name = $row['nif'];
-                $user->nif = $row['nif'];
-                $user->pass = $row['pass'];
-                $user->surname = $row['surname'];
-                $user->telephone = $row['telephone'];
-                $user->username = $row['username'];
-                $data[] = $user;
-                
-            }
-            return $data;
+    Function transformData($res){          
+        $data=[];        
+        //"SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username"
+        //Ajustar las variables al orden.
+        $res->bind_result(
+            $count,
+            $id,
+            $date_registered,
+            $email,            
+            $name,
+            $nif,        
+            $pass,
+            $surname,            
+            $telephone,
+            $username,
+        );
+        while($res->fetch()){
+            if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.
+            $user = new Student();
+            $user->id = $id;
+            $user->date_registered=$date_registered;
+            $user->email=$email;
+            $user->name=$name;
+            $user->nif=$nif;
+            $user->surname=$surname;
+            $user->pass=$pass;            
+            $user->telephone=$telephone;
+            $user->username=$username;
+            $data[] = $user;            
         }        
-        return $numRows;
+        return $data;
     }
 
     public function getAll(){        
-        $sql = 'SELECT * FROM students ORDER BY id';
+        $sql = 'SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students ORDER BY id';
         $result = $this->conn->query($sql);
         return $this->transformData($result);
     }    
@@ -53,55 +59,52 @@ class Students extends DBqueries{
     */ 
 
     public function getById(int $id){
-        $sql = $this->conn->prepare('SELECT * FROM students WHERE id = ?');
+        $sql = $this->conn->prepare('SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students WHERE id = ?');
         $sql->bind_param('i', $id);        
-        $result = $sql->execute();
+        $result = $sql->execute();        
+        $result = $this->transformData($sql);
         $sql->close();
         return $result;
     }
 
     public function getByUsername($username){
-        $sql = $this->conn->prepare("SELECT * FROM students WHERE username = ?");
+        $sql = $this->conn->prepare("SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students WHERE username = ?");
         if($sql->bind_param('s', $username)){
-            $sql->execute();
-            echo($sql->num_rows.' '.$username);
+            $sql->execute();            
             $result = $this->transformData($sql);            
         }else{            
             $result = 'err';
         }
-        $sql->close();
+        $sql->close();        
         return $result;
     }
 
     public function getByEmail($email){
-        $sql = $this->conn->prepare('SELECT * FROM students WHERE email = ?');
+        $sql = $this->conn->prepare('SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students WHERE email = ?');
         $result = $sql->bind_param('s', $id);        
-            
+        $result = $sql->execute();        
+        $result = $this->transformData($sql);
         $sql->close();
         return $result;
     }
 
     public function checkPassMatch($username, $hash){
-        $sql = $this->conn->prepare('SELECT * FROM students WHERE username = ? and pass = ?');
+        $sql = $this->conn->prepare('SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students WHERE username = ? and pass = ?');
         $result = $sql->bind_param('ss', $username, $hash);
-        $result = $sql->execute();
+        $result = $sql->execute();        
+        $result = $this->transformData($sql);
         $sql->close();
-        return $result->affected_rows;
+        return $result;
     }
 
     //INSERT
     public function insertValues($date_registered, $email, $name, $nif, $pass, $surname, $telephone, $username){
-        $sql = $this->conn->prepare("INSERT INTO students (date_registered, email, name, nif, pass, surname, telephone, username) VALUES (?,?,?,?,?,?,?,?)");
-        try{
-            $sql->bind_param("ssssssss", $date_registered, $email, $name, $nif, $pass, $surname, $telephone, $username);
-            $result = $sql->execute();
-        }catch(Exception $e)
-        {
-            echo($e->getMessage());
-        }finally{
-            $sql->close();
-            return $this->transformData($result);
-        }
+        $sql = $this->conn->prepare("INSERT INTO students (date_registered, email, name, nif, pass, surname, telephone, username) VALUES (?,?,?,?,?,?,?,?)");        
+        $sql->bind_param("ssssssss", $date_registered, $email, $name, $nif, $pass, $surname, $telephone, $username);
+        $sql->execute();
+        $res=$sql->affected_rows;
+        $sql->close();        
+        return $res;
     }
     
     public function updateValueById($attribute, $new_value, $id){

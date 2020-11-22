@@ -10,13 +10,15 @@
     <?php include("recursos/html/header.html"); ?>
         <div class="main-container">            
             <div id="wellcome-msg">
-                <div><h1>Test page</h1><div>
+                <div><h2>Test page</h2><div>
             <div>
                 <span>
                     <?php
                         foreach($_POST as $data){
                             echo('<div>'. $data.'</div>');
-                        }                        
+                        }
+                        var_dump($_SERVER);
+                        var_dump($_SESSION);
                     ?>
                 </span>
             </div>            

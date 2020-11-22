@@ -39,9 +39,14 @@ class SignIn {
                         $this->error();
                     }else{                                                
                         $res = $this->mod->insertValues($this->date_registered, $this->email, $this->name, $this->nif, $this->password, $this->surname, $this->telephone,$this->username);
-                        require_once('controllers/logIn.ctrl.php');
-                        $controller = new LogInController();
-                        return $controller -> error('¡Usuario registrado! Inicie sesión.');
+                        if($res>0){
+                            require_once('controllers/logIn.ctrl.php');
+                            $controller = new LogInController();
+                            return $controller -> error('¡Usuario registrado! Inicie sesión.');
+                        }else{
+                            $this->error('Error desconocido al generar el registro. Pongase en contacto con el administrador.');
+                        }
+                        
                     }
                 }
             }
@@ -51,10 +56,14 @@ class SignIn {
     private function checkUsername(){
         if(ctype_alnum($_POST['username'])){
             $res = $this->mod->getByUsername($_POST['username']);            
-            if(!isset($res)||$res>0){ //Verificamos q el nombre no existe.
-                $this->errmsg = 'El nombre de usuario ya existe.';
+            if(isset($res[0]->id)){ //Verificamos q el nombre no existe.
+                $this->errmsg = 'Este usuario ya está registrado.';
                 return false;
-            }                        
+            }
+            if(strlen($_POST['username'])<6){
+                $this->errmsg ="El nombre de usuario no cumple las especificaciones.";
+                return false;
+            }               
             $this->username = $_POST['username'];
             return true;         
         }  
@@ -64,10 +73,14 @@ class SignIn {
 
     private function checkEmail(){        
         $res = $this->mod->getByUsername($_POST['email']);
-        if(!isset($res)||$res>0){ //Verificamos q el email no existe.
-            $this->errmsg ='El email ya existe.';
+        if(isset($res[0]->id)){ //Verificamos q el email no existe.
+            $this->errmsg ='Este email ya está en uso.';
             return false;
-        }                        
+        }
+        if(strlen($_POST['email'])<4&&!substr($_POST['email'],-4).includes('.')){
+            $this->errmsg ='Este email es inválido.';
+            return false;
+        }
         $this->email = $_POST['email'];
         return true;
     }
@@ -88,7 +101,7 @@ class SignIn {
             $this->errmsg ='Las contraseñas no coinciden.';
             return false;
         }        
-        $this->password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $this->password = crypt($_POST['password'],'$6$Nodejesquemeentiendan.Guardameelsecreto.');
         return true;
     }
 
