@@ -29,11 +29,11 @@ class Router{
                     return $this->callErr('Debes iniciar sesión.');
                 }
             break;
-            case 'teacher':
+            /*case 'teacher':
                 if(!isset($_SESSION['user_id'])){
                     return $this->callErr('Debes iniciar sesión.');
                 }
-            break;
+            break;*/
             case 'admin':
                 if(!isset($_SESSION['user_id'])){
                     return $this->callErr('Debes iniciar sesión.');

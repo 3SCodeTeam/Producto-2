@@ -20,7 +20,7 @@
                     <label for="rol">Perfil:</label>
                     <select name="rol_option" id="rol" form="login" required>
                         <option type="text" value="student">Estudiante</option>
-                        <option type="text" value="teacher">Profesor</option>
+                        <!--<option type="text" value="teacher">Profesor</option>-->
                         <option type="text" value="admin">Administrador</option>                                
                     </select>                        
                 </div>            

@@ -35,7 +35,7 @@ class LogInChecker{
     private function callUserTemplate(){
         switch($this->tipo){
             case 'student': return require_once('views/student.view.php');
-            case 'teacher': return require_once('views/teacher.view.php');
+            //case 'teacher': return require_once('views/teacher.view.php');
             case 'admin': return require_once('views/admin.view.php');
             default: return $this->errorMesg('Tipo de usuario incorrecto.');
         }
@@ -46,9 +46,9 @@ class LogInChecker{
             case 'admin':
                 $module = new Admin();                
                 return $module->getByUsername($this->name);
-            case 'student':                
+            /*case 'student':                
                 $module = new Students();                
-                return $module->getByUsername($this->name);                                 
+                return $module->getByUsername($this->name);*/
             case 'teacher':
                 $module = new Teacher();                
                 return $module->getByUsername($this->name);
