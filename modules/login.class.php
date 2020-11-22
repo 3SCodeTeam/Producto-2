@@ -22,9 +22,10 @@ class LogInChecker{
 
     public function checkUser(){    
         $this->user_data = $this->getUserData();
-        if($this -> user_data != 0){
+        
+        if($this -> user_data != 0){            
             if($this->userExist()&&$this->passMatch()){
-               $_SESSION['user_id']=password_hash($this->email, PASSWORD_DEFAULT);
+               $_SESSION['user_id']=rand(999999999, 999999999999);
                 return require_once('public/posttest.php');
             }
         }
@@ -38,7 +39,7 @@ class LogInChecker{
                 return $module->getByUsername($this->name);
             case 'student':                
                 $module = new Students();                
-                return $module->getByUsername($this->name);
+                return $module->getByUsername($this->name);                                 
             case 'teacher':
                 $module = new Teacher();                
                 return $module->getByUsername($this->name);
@@ -50,7 +51,7 @@ class LogInChecker{
         }
         return true;
     }
-    private function passMatch(){        
+    private function passMatch(){             
         if($this->user_data->user->pass === $this->pass){
             true;
         }

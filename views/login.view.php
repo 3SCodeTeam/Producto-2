@@ -13,7 +13,7 @@
         <div class= "main-container">
             <div>
                 <h1>Inicia sesión</h1>
-                <span>o <a href="http://localhost/public/signin.php">Registrate</a></span>
+                <span>o <a href="http://localhost/?controller=signin&method=new">Registrate</a></span>
             </div>
             <div class="form-container">
                 <div class="selector-container">

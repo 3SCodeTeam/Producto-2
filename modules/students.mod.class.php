@@ -12,10 +12,9 @@ class Students extends DBqueries{
         $this->conn = $dbconnection->dbconn();        
         
     }
-    Function transformData($res){        
-        
+    Function transformData($res){                
         if(isset($res) && $res!='err'){
-            $numRows= $res->num_rows;
+            $numRows= $res->num_rows;            
         }else{
             $numRows = 0;
         }
@@ -33,9 +32,10 @@ class Students extends DBqueries{
                 $user->telephone = $row['telephone'];
                 $user->username = $row['username'];
                 $data[] = $user;
+                
             }
             return $data;
-        }
+        }        
         return $numRows;
     }
 
@@ -61,11 +61,12 @@ class Students extends DBqueries{
     }
 
     public function getByUsername($username){
-        $sql = $this->conn->prepare('SELECT * FROM students WHERE username = ?');
+        $sql = $this->conn->prepare("SELECT * FROM students WHERE username = ?");
         if($sql->bind_param('s', $username)){
-            $result = $sql->execute();            
-            $result = $this->transformData($result);
-        }else{
+            $sql->execute();
+            echo($sql->num_rows.' '.$username);
+            $result = $this->transformData($sql);            
+        }else{            
             $result = 'err';
         }
         $sql->close();
@@ -89,13 +90,18 @@ class Students extends DBqueries{
     }
 
     //INSERT
-    public function insertValues($email, $name, $nif, $pass, $surname, $telephone, $username)
-    {
-        $sql = $his->conn->prepare('INSERT INTO students (email, name, nif, pass username, telephone, username) VALUES (?,?,?,?,?,?,?)');
-        $result = $sql->bind_param('sssssss', $email, $name, $nif, $pass, $surname, $telephone, $username);
-        $result = $sql->execute();
-        $sql->close();
-        return $result->affected_rows;
+    public function insertValues($date_registered, $email, $name, $nif, $pass, $surname, $telephone, $username){
+        $sql = $this->conn->prepare("INSERT INTO students (date_registered, email, name, nif, pass, surname, telephone, username) VALUES (?,?,?,?,?,?,?,?)");
+        try{
+            $sql->bind_param("ssssssss", $date_registered, $email, $name, $nif, $pass, $surname, $telephone, $username);
+            $result = $sql->execute();
+        }catch(Exception $e)
+        {
+            echo($e->getMessage());
+        }finally{
+            $sql->close();
+            return $this->transformData($result);
+        }
     }
     
     public function updateValueById($attribute, $new_value, $id){

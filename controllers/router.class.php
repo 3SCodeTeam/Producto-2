@@ -17,10 +17,12 @@ class Router{
         }
         switch($this->controller){
             case 'login':                
-                require_once('controllers/'.$this->controller.'.ctrl.php');
+                require_once('controllers/'.$this->controller.'.ctrl.php'); //MIRAR /controllers/logIn.ctrl.php
                 $this->controller = new LogInController();
                 break;
-            case 'register':
+            case 'signin':
+                require_once('controllers/'.$this->controller.'.ctrl.php'); //MIRAR /controllers/signIn.ctrl.php
+                $this->controller = new SignInController();
                 break;
             case 'student':
                 if(!isset($_SESSION['user_id'])){

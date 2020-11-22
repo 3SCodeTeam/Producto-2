@@ -37,20 +37,9 @@ body{
     margin: 0;
     padding:0
 }
-    /*¿¿¿¿¿¿¿Trasladar a style.css????*/
-input[type="Submit"]{
-    display: inline-block;
-    padding: 3px;
-    color: white;
-    background-color: red;
-    width: 250px;
-    margin: 10px auto;
-    border-radius: 20px;    
+.errmsg{
+    margin-top: 55px;
+    color:red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-large;
 }
-
-input[type="Submit"]:hover{
-    background-color: red;
-    color: black;
-    border: solid 2px black;
-}
-
