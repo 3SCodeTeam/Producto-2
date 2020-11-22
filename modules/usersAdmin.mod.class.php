@@ -84,7 +84,7 @@ class usersAdmin extends DBconn {
     }
 
     public function insertValues($username, $name, $email, $password) {
-        $sql = $this->conn->prepare('INSERT INTO users_admin (username, name, email, password) VALUES (?, ?, ?, ?, ?)');
+        $sql = $this->conn->prepare('INSERT INTO users_admin (username, name, email, password) VALUES (?, ?, ?, ?)');
         $res = $sql->bind_param('ssss', $id, $username, $name, $email, $password);
         $sql->close();
         return $res->affected_rows;
