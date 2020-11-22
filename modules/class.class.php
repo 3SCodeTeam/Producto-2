@@ -3,6 +3,7 @@ include_once 'includes/autoloader.inc.php';
 
 class Classes{   
     
+    public $count;
     public $color;
     public $id_class;
     public $id_course;
