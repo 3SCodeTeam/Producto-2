@@ -4,13 +4,13 @@
 include_once 'DBconfig.class.php';
 class DBconnection extends Dbconfig{
 
-    protected $conn;
+    public $conn;
     protected $db;
     protected $host;
     protected $user;
     protected $pass;
 
-    function __construct(){
+    public function __construct(){
         $this -> connection = NULL;
         $dbParam = new Dbconfig();
         $this -> db = $dbParam -> dbName;

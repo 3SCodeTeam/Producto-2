@@ -1,18 +1,20 @@
 <?php
 include_once 'includes/autoloader.inc.php';
 
-class Students extends DBqueries{
+class Students{
     
     private $conn;
 
     public function __construct(){
-        
-        parent::__construct('students');        
+                
+        //parent::__construct();
+        //$this->conn = parent::dbconn();
+        //parent::__construct('students');
         $dbconnection = new DBconnection();
-        $this->conn = $dbconnection->dbconn();        
+        $this->conn = $dbconnection->dbconn();
         
     }
-    function transformData($res){          
+    function transformData($res){              
         $data=[];        
         //"SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username"
         //Ajustar las variables al orden.
@@ -29,8 +31,10 @@ class Students extends DBqueries{
             $username,
         );
         while($res->fetch()){
-            if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.
             $user = new Student();
+            $user->count = $count;
+            if($count == 0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.
+            
             $user->id = $id;
             $user->date_registered=$date_registered;
             $user->email=$email;
@@ -46,9 +50,12 @@ class Students extends DBqueries{
     }
 
     public function getAll(){        
-        $sql = 'SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students ORDER BY id';
-        $result = $this->conn->query($sql);
-        return $this->transformData($result);
+        $sql = $this->conn->prepare('SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students ORDER BY id');
+        $sql->execute(); //Ejecutas la consulta con la sentencia preparada
+        $res = $this->transformData($sql); //Recuperas un array de datos.
+        var_dump($res); 
+        $sql->close(); //Cierras la consulta.
+        return $res; //Devuelves los datos.
     }    
 
     /*Select Data With PDO (+ Prepared Statements)
@@ -61,10 +68,10 @@ class Students extends DBqueries{
     public function getById(int $id){
         $sql = $this->conn->prepare('SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students WHERE id = ?');
         $sql->bind_param('i', $id);        
-        $result = $sql->execute();        
-        $result = $this->transformData($sql);
+        $sql->execute();        
+        $res = $this->transformData($sql);
         $sql->close();
-        return $result;
+        return $res;
     }
 
     public function getByUsername($username){
@@ -81,20 +88,20 @@ class Students extends DBqueries{
 
     public function getByEmail($email){
         $sql = $this->conn->prepare('SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students WHERE email = ?');
-        $result = $sql->bind_param('s', $id);        
-        $result = $sql->execute();        
-        $result = $this->transformData($sql);
+        $sql->bind_param('s', $id);        
+        $sql->execute();        
+        $res = $this->transformData($sql);
         $sql->close();
-        return $result;
+        return $res;
     }
 
     public function checkPassMatch($username, $hash){
         $sql = $this->conn->prepare('SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students WHERE username = ? and pass = ?');
-        $result = $sql->bind_param('ss', $username, $hash);
-        $result = $sql->execute();        
-        $result = $this->transformData($sql);
+        $sql->bind_param('ss', $username, $hash);
+        $sql->execute();        
+        $res = $this->transformData($sql);
         $sql->close();
-        return $result;
+        return $res;
     }
 
     //INSERT
@@ -109,19 +116,21 @@ class Students extends DBqueries{
     
     public function updateValueById($attribute, $new_value, $id){
         $sql = $his->conn->prepare('UPDATE students SET ? = ? WHERE id = ?');
-        $result = $sql->bind_param('ssss', $attribute, $new_value, $id);
-        $result = $sql->execute();
-        $sql->close();
-        return $result->affected_rows;
+        $sql->bind_param('ssss', $attribute, $new_value, $id);
+        $sql->execute();
+        $res=$sql->affected_rows;
+        $sql->close();        
+        return $res;
     }
 
     //DELETE int $mysqli->affected_rows;
     public function deleteById($id){
         $sql = $his->conn->prepare('DELETE FROM students WHERE id = ?');
-        $result = $sql->bind_param('s', $id);
-        $result = $sql->execute();
+        $sql->bind_param('s', $id);
+        $sql->execute();
+        $res=$sql->affected_rows;
         $sql->close();
-        return $result->affected_rows;
+        return $res;
     }
 }    
 ?>

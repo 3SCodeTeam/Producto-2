@@ -1,11 +1,13 @@
 <?php
-class Classes extends DBconnection{
+include_once 'includes/autoloader.inc.php';
+class Classes{
     private $conn;
     
     public function __construct(){
-        parent::__construct();
-        $this->con = parent::dbconn();
-        /*$this->conn = $dbconnection->dbconn();*/
+        //parent::__construct();
+        //$this->con = parent::dbconn();
+        $dbconnection = new DBconnection();
+        $this->conn = $dbconnection->dbconn();
     }
 
     function transformData($res){          
@@ -37,9 +39,11 @@ class Classes extends DBconnection{
     }
 
     public function getAll(){        
-        $sql = 'SELECT COUNT(id_class), id_class, id_teacher, id_course, id_schedule, name, color FROM class';
-        $res = $this->conn->query($sql);
-        return transformData($res);
+        $sql = $this->conn->prepare('SELECT COUNT(id_class), id_class, id_teacher, id_course, id_schedule, name, color FROM class');
+        $sql->execute();
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }
 
     /*Select Data With PDO (+ Prepared Statements)
@@ -54,49 +58,56 @@ class Classes extends DBconnection{
     public function getById(int $id){
         $sql = $this->conn->prepare('SELECT COUNT(id_class), id_class, id_teacher, id_course, id_schedule, name, color FROM class WHERE id_class = ?');
         $sql->bind_param('i', $id);        
+        $sql->execute();
+        $res = $this->transformData($sql);
         $sql->close();
-        $res = $sql->execute();
-        return transformData($res);
+        return $res;
     }
     public function getByScheduleId(int $id_schedule){
         $sql = $this->conn->prepare('SELECT COUNT(id_class), id_class, id_teacher, id_course, id_schedule, name, color FROM class WHERE id_schedule = ?');
         $sql->bind_param('i', $id_schedule);        
-        $res = $sql->execute();
-        $sql->close();        
-        return transformData($res);
+        $sql->execute();
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }
 
     public function getByCourseId($id_course){
         $sql = $this->conn->prepare('SELECT COUNT(id_class), id_class, id_teacher, id_course, id_schedule, name, color FROM class WHERE id_course = ?');
-        $res = $sql->bind_param('s', $id_course);
-        $res = $sql->execute();
-        $sql->close();        
-        return transformData($res);
+        $sql->bind_param('s', $id_course);
+        $sql->execute();
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }
 
     public function getByTecherId($id_techer){
         $sql = $this->conn->prepare('SELECT COUNT(id_class), id_class, id_teacher, id_course, id_schedule, name, color FROM class WHERE id_teacher = ?');
-        $res = $sql->bind_param('s', $id_techer);        
-        $res = $sql->execute();
+        $sql->bind_param('s', $id_techer);        
+        $sql->execute();
+        $res = $this->transformData($sql);
         $sql->close();
-        return transformData($res);
+        return $res;
     }
 
     public function checkPassMatch($username, $hash){
         $sql = $this->conn->prepare('SELECT COUNT(id_class), id_class, id_teacher, id_course, id_schedule, name, color FROM class WHERE username = ? and pass = ?');
-        $res = $sql->bind_param('ss', $username, $hash);        
-        $res = $sql->execute();
+        $sql->bind_param('ss', $username, $hash);        
+        $sql->execute();
+        $res = $this->transformData($sql);
         $sql->close();
-        return transformData($res);
+        return $res;
     }
 
     //INSERT
     public function insertValues($id_techer, $id_course, $id_schedule, $name, $color)
     {
         $sql = $his->conn->prepare('INSERT INTO class (id_teacher, id_course, id_schedule, name, color) VALUES (?,?,?,?,?)');
-        $res = $sql->bind_param('sssss', $id_techer, $id_course, $id_schedule, $name, $color);
+        $sql->bind_param('sssss', $id_techer, $id_course, $id_schedule, $name, $color);
+        $sql->execute();
+        $res->$sql->affected_rows;
         $sql->close();
-        return $res->affected_rows;
+        return $res;
     }
 
     // ATENCIÓN: ESTOS MÉTODOS A LO MEJOR LOS PASAMOS A DBqueries.class.php POR QUE SON COMUNES A TODAS LAS TABLAS.
@@ -104,17 +115,21 @@ class Classes extends DBconnection{
 
     public function updateValueById($attribute, $new_value, $id){
         $sql = $his->conn->prepare('UPDATE class SET ? = ? WHERE id = ?');
-        $res = $sql->bind_param('sss', $attribute, $new_value, $id);
+        $sql->bind_param('sss', $attribute, $new_value, $id);
+        $sql->execute();
+        $res->$sql->affected_rows;
         $sql->close();
-        return $res->affected_rows;
+        return $res;
     }
 
     //DELETE int $mysqli->affected_rows;
     public function deleteById($id){
         $sql = $his->conn->prepare("DELETE FROM class WHERE id_class = ?");
-        $res = $sql->bind_param('s', $id);
+        $sql->bind_param('s', $id);
+        $sql->execute();
+        $res->$sql->affected_rows;
         $sql->close();
-        return $res->affected_rows;
+        return $res;
     }
 }
 
