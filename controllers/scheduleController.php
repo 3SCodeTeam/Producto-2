@@ -9,26 +9,26 @@ class scheduleController extends schedule {
             $day = date('l', strtotime($date));
             switch ($day) {
                 case "Monday":
-                    // llamar a funcion PINTAR Monday
+                    // llamar a funcion MONDAY schedule
                 break;
                 case "Tuesday":
-                    // llamar a funcion PINTAR Monday
+                    // llamar a funcion TUESDAY schedule
                 break;
                 case "Wednesday":
-                    // llamar a funcion PINTAR Monday
+                    // llamar a funcion WEDNESDAY schedule
                 break;
                 case "Thursday":
-                    // llamar a funcion PINTAR Monday
+                    // llamar a funcion THURSDAY schedule
                 break;
                 case "Friday":
-                    // llamar a funcion PINTAR Monday
+                    // llamar a funcion FRIDAY schedule
                 break;
             }
             $date++;
         }
     }
 
-    public function pintarMonday() {
+    public function mondaySchedule() {
         $hora = []; // declaramos array para las 6 horas diarias
         $hora[0] = 'Programacion';
         $hora[1] = 'Programacion';
