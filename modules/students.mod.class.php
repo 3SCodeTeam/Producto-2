@@ -12,7 +12,7 @@ class Students extends DBqueries{
         $this->conn = $dbconnection->dbconn();        
         
     }
-    Function transformData($res){          
+    function transformData($res){          
         $data=[];        
         //"SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username"
         //Ajustar las variables al orden.
