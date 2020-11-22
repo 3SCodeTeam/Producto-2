@@ -1,0 +1,38 @@
+
+.main-container{
+    display: block;
+    text-align: center;    
+    width: 100%;
+    margin: 0;  
+    columns: 2;  
+}
+h1{    
+    font-size: xx-large;
+    margin-top: 1em;
+}
+a{
+    color:red;        
+}
+form div{
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    width: 10px
+}
+.signin-form-inputs{
+    display: block;
+    padding: 5px;
+    margin: 5px;
+    width: 100px;
+    border: red solid;
+}
+div span{
+    font-size: medium;
+}
+.errmsg{
+    margin-top: 55px;
+    color:red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+}

@@ -1,20 +1,21 @@
 <?php
+include_once 'includes/autoLoader.inc.php';
 
-$req = parse_url($_SERVER['REQUEST_URI']);
-echo implode($req);
-echo "NNNNNNNNNNN";
-echo ($_SERVER['REQUEST_URI']);
+#session_start();
+//El controlador y la acción del controlador se pasan en la URL. http://localhost/index.php?controller=controllerName&action=ActionName
+//¿¿¿Controlamos el inicio de sessión en este punto con la variable $SESSIONS???
 
-switch($req){
-    case '/' :
-    case '':
-        echo $req;
-    case '/prueba':
-        echo 'prueba';
-        echo $req;
-        echo $_SERVER['REQUEST_URI'];
-    break;
+if (isset($_GET['controller'])&&isset($_GET['method'])) {
+    $route = new Router($_GET['controller'], $_GET['method']);
+    $route -> call();
+} else {
+    //Acción predeterminada si no se le pasa un controlador y acción en la ruta ó no se ha iniciado sessión.
+    //Este controlador no debe controlar que exista sessión.
+
+    $route = new Router('login', 'new');
+    $route -> call();
 }
-
+//carga la vista layout.php
+#require_once('Views/layout.php');
 
 ?>

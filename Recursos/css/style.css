@@ -1,0 +1,45 @@
+header a{    
+    color: red;
+    font-size: xx-large;    
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;    
+    text-align: center;
+}
+header div{    
+    display: block;
+    margin-top: 0.5em;    
+    position: relative;
+    top:0;    
+    padding: 1em;
+    border-bottom: red solid thin;
+}
+
+
+footer{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+    text-align: center;
+    color: white;
+    background-color: red;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2em;
+}
+
+body{
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding:0
+}
+.errmsg{
+    margin-top: 55px;
+    color:red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+}

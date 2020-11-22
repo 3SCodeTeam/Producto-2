@@ -1,0 +1,33 @@
+.main-container{
+    margin-top: 10em;
+    display: block;
+    text-align: center;
+}
+
+#wellcome-msg{        
+    font-size: large;
+    text-align: center;
+}
+#wellcome-msg h1{
+    font-size: 8em;
+    margin-bottom: 0.5em;
+}
+
+.button-href{
+    display: inline-block;        
+    margin: 0 5em 0 5em;    
+    background: red ;    
+    border: black solid 2px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 350px;
+}
+.button-href a{
+    font-size: x-large;
+    text-decoration: none; 
+    color: white;
+}
+.button-href{    
+    border: black;
+    color: black;
+}

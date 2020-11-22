@@ -1,0 +1,37 @@
+.main-container{
+    display: block;
+    text-align: center;    
+}
+input {
+    font-size: x-large;
+    margin: 1ex;
+}
+.selector-container select{
+    font-size: x-large;
+    margin: 1ex 1ex 3ex 1ex;
+
+}
+
+h1{
+    font-size: 2em;    
+    margin-bottom: 5px;
+}
+label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+}
+
+div span{
+    font-size: large;
+    margin-bottom: 10px;  
+}
+a{
+    color:red;        
+}
+
+.errmsg{
+    margin-top: 55px;
+    color:red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+}

@@ -1,0 +1,15 @@
+div{
+    text-align: center;
+    display: block;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+h1{    
+    font-size: 15vh;
+    padding-bottom: 25vh    
+}
+body{
+    background-image: "G:\\repos\\UOC\\3SCode\\Producto2\\Recursos\\img\\kai-pilger-1k3vsv7iIIc-unsplash.jpg"
+}
