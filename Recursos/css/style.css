@@ -1,3 +1,6 @@
+
+/* ESTOS ESTILOS SE APLICAN A TODAS LAS PLANTILLAS*/
+
 header a{    
     color: red;
     font-size: xx-large;    
@@ -37,9 +40,18 @@ body{
     margin: 0;
     padding:0
 }
+
+/*AJUSTES COMUNES*/
 .errmsg{
     margin-top: 55px;
     color:red;
     font-family: Arial, Helvetica, sans-serif;
     font-size: xx-large;
+}
+h1{
+    font-size: 2em;    
+    margin-bottom: 5px;
+}
+a{
+    color:red;
 }

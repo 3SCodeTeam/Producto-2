@@ -1,17 +1,31 @@
+h1{
+    font-size: 2em;    
+    margin-bottom: 5px;
+}
+a{
+    color:red;
+}
 
+.main-container{
+    display: block;
+    text-align: center;
+}
+input {
+    font-size: x-large;
+    margin: 1ex;
+}
+div span{
+    font-size: large;
+    margin-bottom: 10px;  
+}
+
+/*
 .main-container{
     display: block;
     text-align: center;    
     width: 100%;
     margin: 0;  
     columns: 2;  
-}
-h1{    
-    font-size: xx-large;
-    margin-top: 1em;
-}
-a{
-    color:red;        
 }
 form div{
     display: inline-block;
@@ -30,6 +44,7 @@ form div{
 div span{
     font-size: medium;
 }
+*/
 .errmsg{
     margin-top: 55px;
     color:red;
