@@ -32,7 +32,7 @@
             <div>QUERY ADMIN
             <?php
                 require_once('Modules/usersAdmin.mod.class.php');
-                $res = new usersAdmin();
+                $res = new usersAdminMod();
                 $res->getAll();
                 var_dump($res);
             ?>
@@ -40,7 +40,7 @@
             <div>QUERY SHEDULE
             <?php
                 require_once('Modules/schedule.mod.class.php');
-                $res = new Schedule();
+                $res = new ScheduleMod();
                 $res->getAll();
                 var_dump($res);
             ?>
@@ -48,7 +48,7 @@
             <div>QUERY ENROLLMENT
             <?php
                 require_once('Modules/enrollment.mod.class.php');
-                $res = new Enrollment();
+                $res = new EnrollmentMod();
                 $res->getAll();
                 var_dump($res);
             ?>
@@ -56,11 +56,27 @@
             <div>QUERY CLASS
             <?php
                 require_once('Modules/classes.mod.class.php');
-                $res = new Classes();
+                $res = new ClassesMod();
                 $res->getAll();
                 var_dump($res);
             ?>
-            </div>
+            </div><br>
+            <div>QUERY TEACHERS
+            <?php
+                require_once('Modules/teachers.mod.class.php');
+                $res = new TeachersMod();
+                $res->getAll();
+                var_dump($res);
+            ?>
+            </div><br>
+            <div>QUERY COURSES
+            <?php
+                require_once('Modules/courses.mod.class.php');
+                $res = new CoursesMod();
+                $res->getAll();
+                var_dump($res);
+            ?>
+            </div><br>
 
             <!--EL CÓDIGO DE ARRIBA ES UNA PRUEBA-->
             

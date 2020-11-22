@@ -6,7 +6,7 @@ class Teacher{
     public $email;
     public $id_teacher;
     public $name;    
-    public $pass;
+    //public $pass;
     public $surname;
     public $telephone;    
 }

@@ -1,7 +1,7 @@
 <?php
 include_once 'includes/autoloader.inc.php';
 
-class usersAdmin{
+class usersAdminMod{
     private $conn;
     private $id_user_admin;
     private $username;

@@ -1,7 +1,7 @@
 <?php
 include_once 'includes/autoloader.inc.php';
 
-class Courses{   
+class Course{   
     public $count;
     public $active;
     public $date_end;

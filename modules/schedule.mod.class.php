@@ -1,7 +1,7 @@
 <?php
 include_once 'includes/autoloader.inc.php';
 
-class Schedule{
+class ScheduleMod{
     protected $conn;
     private $id_schedule;
     private $id_class;

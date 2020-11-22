@@ -1,6 +1,6 @@
 <?php
 include_once 'includes/autoloader.inc.php';
-class Enrollment{
+class EnrollmentMod{
     protected $conn;
 
     public function __construct(){        
