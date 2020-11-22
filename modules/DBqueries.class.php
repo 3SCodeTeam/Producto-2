@@ -46,8 +46,9 @@ class DBqueries{
     public function getByAttributes($col1, $col2, $val1, $val2, string $operator){
         $sql = $this->conn->prepare("SELECT * FROM $this->table WHERE ? = ? ? ? = ?");
         $sql->bind_param('ssss', $col1, $val1,$operator,$col2,$val2);
+        $sql->execute();
+        $res = $sql->get_results();
         $sql->close();
-        $result = $sql->execute();
         return $result;
     }
 
@@ -59,9 +60,11 @@ class DBqueries{
     //UPDATE
     public function updateValue($attribute, $new_value, $col, $val){
         $sql = $his->conn->prepare("UPDATE $this->table SET ? = ? WHERE ? = ?");
-        $result = $sql->bind_param('ssss', $attribute, $new_value, $col, $val);
+        $sql->bind_param('ssss', $attribute, $new_value, $col, $val);
+        $sql->execute();
+        $res= $sql->affected_rows;
         $sql->close();       
-        return $result->affected_rows;
+        return $res;
     }
 
     /*

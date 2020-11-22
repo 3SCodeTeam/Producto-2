@@ -18,9 +18,68 @@
 
         <div id="main-container">
             <H1>HORARIO</H1>
-            
+            <div>SESSION DATA
             <?php var_dump($_SESSION);?><!--RELLLENO DE PRUEBA-->
+            </div><br>
+            <div>QUERY STUDENTS
+            <?php
+                require_once('Modules/students.mod.class.php');
+                $res = new Students();
+                $res->getAll();
+                var_dump($res);
+            ?>
+            </div><br>
+            <div>QUERY ADMIN
+            <?php
+                require_once('Modules/usersAdmin.mod.class.php');
+                $res = new usersAdminMod();
+                $res->getAll();
+                var_dump($res);
+            ?>
+            </div><br>
+            <div>QUERY SHEDULE
+            <?php
+                require_once('Modules/schedule.mod.class.php');
+                $res = new ScheduleMod();
+                $res->getAll();
+                var_dump($res);
+            ?>
+            </div><BR>
+            <div>QUERY ENROLLMENT
+            <?php
+                require_once('Modules/enrollment.mod.class.php');
+                $res = new EnrollmentMod();
+                $res->getAll();
+                var_dump($res);
+            ?>
+            </div><BR>
+            <div>QUERY CLASS
+            <?php
+                require_once('Modules/classes.mod.class.php');
+                $res = new ClassesMod();
+                $res->getAll();
+                var_dump($res);
+            ?>
+            </div><br>
+            <div>QUERY TEACHERS
+            <?php
+                require_once('Modules/teachers.mod.class.php');
+                $res = new TeachersMod();
+                $res->getAll();
+                var_dump($res);
+            ?>
+            </div><br>
+            <div>QUERY COURSES
+            <?php
+                require_once('Modules/courses.mod.class.php');
+                $res = new CoursesMod();
+                $res->getAll();
+                var_dump($res);
+            ?>
+            </div><br>
 
+            <!--EL CÓDIGO DE ARRIBA ES UNA PRUEBA-->
+            
             <?php /*INSERTAR CODIGO PHP HORARIO*/ ?>
             <?php /*INSERTAR CODIGO PHP PERFIL*/ ?>
             <?php /*INSERTAR CODIGO PHP MATRICULA*/ ?>
