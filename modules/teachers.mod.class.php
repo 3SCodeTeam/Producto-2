@@ -75,24 +75,42 @@ class TeachersMod{
     //SELECT BY ATTRIBUTE
 
     public function getById(int $id){
-        $this->getByAttribute('id_teacher',$id);
+        //return $this->getByAttribute('id_teacher',$id);
+        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE id_teacher = ?');
+        $sql->bind_param('s', $id);        
+        $sql->execute();
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }
 
-    public function getByEmail(int $email){
-        $this->getByAttribute('email',$email);
+    public function getByEmail($email){
+        //return $this->getByAttribute('email',$email);
+        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE email = ?');
+        $sql->bind_param('s', $email);        
+        $sql->execute();
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }
 
     public function getByNIF($nif){
-        $this->getByAttribute('nif',$nif);
+        //return $this->getByAttribute('nif',$nif);
+        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE nif = ?');
+        $sql->bind_param('s', $nif);        
+        $sql->execute();
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }    
 
     //INSERT
     public function insertValues($name, $surname, $telephone, $nif, $email)
     {
-        $sql = $his->conn->prepare('INSERT INTO class (name, surname, telephone, nif, email) VALUES (?,?,?,?,?)');
+        $sql = $this->conn->prepare('INSERT INTO teachers (name, surname, telephone, nif, email) VALUES (?, ?, ?, ?, ?)');        
         $sql->bind_param('sssss', $name, $surname, $telephone, $nif, $email);
         $sql->execute();
-        $res->$sql->affected_rows;
+        $res=$sql->affected_rows;
         $sql->close();
         return $res;
     }
@@ -100,20 +118,20 @@ class TeachersMod{
     //UPDATE
 
     public function updateValueById($attribute, $new_value, $id){
-        $sql = $his->conn->prepare('UPDATE teachers SET ? = ? WHERE id_teacher = ?');
+        $sql = $this->conn->prepare('UPDATE teachers SET ? = ? WHERE id_teacher = ?');
         $sql->bind_param('sss', $attribute, $new_value, $id);
         $sql->execute();
-        $res->$sql->affected_rows;
+        $res=$sql->affected_rows;
         $sql->close();
         return $res;
     }
 
     //DELETE int $mysqli->affected_rows;
     public function deleteById($id){
-        $sql = $his->conn->prepare("DELETE FROM class WHERE id_teacher = ?");
+        $sql = $this->conn->prepare("DELETE FROM class WHERE id_teacher = ?");
         $sql->bind_param('s', $id);
         $sql->execute();
-        $res->$sql->affected_rows;
+        $res=$sql->affected_rows;
         $sql->close();
         return $res;
     }

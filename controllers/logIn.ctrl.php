@@ -1,4 +1,5 @@
 <?php
+include_once 'includes/autoloader.inc.php';
 require_once('views/login.var.php');
 class LogInController{
 

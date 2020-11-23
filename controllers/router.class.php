@@ -1,13 +1,13 @@
 <?php
 include_once 'includes/autoLoader.inc.php';
 class Router{
-
+    
     private $controller;
     private $method;
 
     public function __construct($controller, $method){
         $this->controller = $controller;
-        $this->method = $method;
+        $this->method = $method;        
     }
 
     public function call(){
@@ -27,16 +27,22 @@ class Router{
             case 'student':
                 if(!isset($_SESSION['user_id'])){
                     return $this->callErr('Debes iniciar sesión.');
+                }else{
+                    require_once('controllers/'.$this->controller.'.ctrl.php'); //MIRAR /controllers/student.ctrl.php
+                    $this->controller = new StudentController();
                 }
             break;
-            case 'teacher':
+            /*case 'teacher':
                 if(!isset($_SESSION['user_id'])){
                     return $this->callErr('Debes iniciar sesión.');
                 }
-            break;
-            case 'admin':
+            break;*/
+            case 'admin':                
                 if(!isset($_SESSION['user_id'])){
                     return $this->callErr('Debes iniciar sesión.');
+                }else{
+                    require_once('controllers/'.$this->controller.'.ctrl.php'); //MIRAR /controllers/admin.ctrl.php
+                    $this->controller = new AdminController();
                 }
             break;
             case 'error':

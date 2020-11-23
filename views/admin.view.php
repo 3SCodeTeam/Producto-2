@@ -14,7 +14,7 @@
         ?>
 
         <div class= "nav-bar">
-            <?php require_once('templates/admin.menu.view.php'); ?>
+            <?php require('templates/admin.menu.view.php'); ?>
         </div>
 
         <div class= "nav-bar">
@@ -22,14 +22,37 @@
         </div>
 
         <div id="main-container">
-    
-            <H1>CONFIGURACIONES</H1>
-            
-            <?php var_dump($_SESSION);?><!--RELLLENO DE PRUEBA-->
 
-            <?php /*INSERTAR CODIGO PHP HORARIO*/ ?>
-            <?php /*INSERTAR CODIGO PHP PERFIL*/ ?>
-            <?php /*INSERTAR CODIGO PHP MATRICULA*/ ?>
+            <?php /*INSERTAR CODIGO PHP PERFIL*/
+                require_once('views/admin.var.php');
+                if(AdminVar::getProfile()){
+                    require_once('templates/admin.profile.view.php');
+                }
+             ?>
+            <?php /*INSERTAR CODIGO PHP PROFESORES*/
+                require_once('views/admin.var.php');                
+                if(AdminVar::getTeacher()){
+                    require_once('templates/admin.teachers.view.php');
+                }
+             ?>
+            <?php /*INSERTAR CODIGO PHP CURSOS*/
+                require_once('views/admin.var.php');
+                if(AdminVar::getCourses()){
+                    require_once('templates/admin.courses.view.php');
+                }
+             ?>
+            <?php /*INSERTAR CODIGO PHP ASIGNATURAS*/
+                require_once('views/admin.var.php');
+                if(AdminVar::getClasses()){
+                    require_once('templates/admin.classes.view.php');
+                }
+            ?>
+            <?php /*INSERTAR CODIGO PHP ELIMINAR*/
+                require_once('views/admin.var.php');
+                if(AdminVar::getDelete()){
+                    require_once('templates/admin.delete.view.php');
+                }
+            ?>
         </div>            
 
         <div class="alert-msg">

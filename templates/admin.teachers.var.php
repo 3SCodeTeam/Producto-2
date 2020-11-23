@@ -1,5 +1,5 @@
 <?php
-class LogInvar{
+class AdminTeachers{
     public static $errormsg;    
 }
 ?>

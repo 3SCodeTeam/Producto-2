@@ -72,22 +72,22 @@ class ClassesMod{
     }
 
     public function getById(int $id){
-        $this->getByAttribute('id_class',$id);
+        return $this->getByAttribute('id_class',$id);
     }
     public function getByScheduleId(int $id_schedule){
-        $this->getByAttribute('id_schedule',$id_schedule);
+        return $this->getByAttribute('id_schedule',$id_schedule);
     }
     public function getByCourseId($id_course){
-        $this->getByAttribute('id_course',$id_course);
+        return $this->getByAttribute('id_course',$id_course);
     }
     public function getByTecherId($id_techer){
-        $this->getByAttribute('id_teacher',$id_teacher);
+        return $this->getByAttribute('id_teacher',$id_teacher);
     }
     public function getByName($name){
-        $this->getByAttribute('name',$name);
+        return $this->getByAttribute('name',$name);
     }
     public function getByColor($color){
-        $this->getByAttribute('color',$color);
+        return $this->getByAttribute('color',$color);
     }
 
     //INSERT
