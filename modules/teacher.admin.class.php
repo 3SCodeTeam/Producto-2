@@ -18,15 +18,15 @@
         public function createTeacher(){
             $email = $this->mod->getByEmail($this->teacher->email);
             $nif = $this->mod->getByNIF($this->teacher->nif);
-            if(!(isset($email[0])&&isset($nif[0]))){
+            if(!(isset($email)&&isset($nif))){
                 $this->err = "Error de conexión a la base de datos.";
                 return false;
             }
-            if(!($email[0]->count == 0)){
+            if(!($email == 0)){
                 $this->err = "El email ya existe en la base de datos.";
                 return false;
             }
-            if(!($nif[0]->count == 0)){
+            if(!($nif == 0)){
                 $this->err = "El NIF ya existe en la base de datos.";
                 return false;
             }

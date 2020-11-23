@@ -23,3 +23,12 @@ a{
     vertical-align: middle;
     font-size: x-large;
 }
+.item.selected{
+    color: black;
+
+}
+.item:hover{
+    text-shadow: black;
+    text-decoration-line: underline;
+    text-decoration-line: overline;
+}

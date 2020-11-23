@@ -107,10 +107,10 @@ class TeachersMod{
     //INSERT
     public function insertValues($name, $surname, $telephone, $nif, $email)
     {
-        $sql = $his->conn->prepare('INSERT INTO class (name, surname, telephone, nif, email) VALUES (?,?,?,?,?)');
+        $sql = $this->conn->prepare('INSERT INTO teachers (name, surname, telephone, nif, email) VALUES (?, ?, ?, ?, ?)');        
         $sql->bind_param('sssss', $name, $surname, $telephone, $nif, $email);
         $sql->execute();
-        $res->$sql->affected_rows;
+        $res=$sql->affected_rows;
         $sql->close();
         return $res;
     }
@@ -118,20 +118,20 @@ class TeachersMod{
     //UPDATE
 
     public function updateValueById($attribute, $new_value, $id){
-        $sql = $his->conn->prepare('UPDATE teachers SET ? = ? WHERE id_teacher = ?');
+        $sql = $this->conn->prepare('UPDATE teachers SET ? = ? WHERE id_teacher = ?');
         $sql->bind_param('sss', $attribute, $new_value, $id);
         $sql->execute();
-        $res->$sql->affected_rows;
+        $res=$sql->affected_rows;
         $sql->close();
         return $res;
     }
 
     //DELETE int $mysqli->affected_rows;
     public function deleteById($id){
-        $sql = $his->conn->prepare("DELETE FROM class WHERE id_teacher = ?");
+        $sql = $this->conn->prepare("DELETE FROM class WHERE id_teacher = ?");
         $sql->bind_param('s', $id);
         $sql->execute();
-        $res->$sql->affected_rows;
+        $res=$sql->affected_rows;
         $sql->close();
         return $res;
     }

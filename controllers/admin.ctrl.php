@@ -17,20 +17,20 @@ class AdminController{
     }
 
     public function teacher(){
+        AdminMenu::$menu='teacher';
         AdminVar::activeMenu('teacher');
         require_once("views/admin.view.php");
     }
 
     public function teacherPost(){
-        $createTeacher = new TeacherAdd();
+        $createTeacher = new TeacherAdd();        
         If($createTeacher->createTeacher()){
             AdminVar::activeMenu('teacher');
-            AdminTeachers::$errormsg="Datos registrados.";
+            AdminTeachers::$errormsg="Datos registrados.";            
             require_once("views/admin.view.php");
         }else{            
             AdminVar::activeMenu('teacher');            
-            AdminTeachers::$errormsg=$createTeacher->err;
-            echo(AdminVar::getteacher());
+            AdminTeachers::$errormsg=$createTeacher->err;            
             require_once("views/admin.view.php");
         }
     }
