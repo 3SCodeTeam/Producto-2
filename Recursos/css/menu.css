@@ -29,6 +29,6 @@ a{
 }
 .item:hover{
     text-shadow: black;
-    text-decoration-line: underline;
-    text-decoration-line: overline;
+    border-top: white solid;
+    border-bottom: white solid;    
 }

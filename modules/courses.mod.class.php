@@ -24,7 +24,7 @@ class CoursesMod{
             $active,
         );
         while($res->fetch()){
-            if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.
+            if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.  
             $user = new Course();
             $user->count=$count;
             $user->id_course = $id;            
@@ -33,7 +33,8 @@ class CoursesMod{
             $user->date_start=$date_start;
             $user->date_end=$date_end;
             $user->active=$active;
-            $data[] = $user;        
+            $data[] = $user;
+            
         }        
         return $data;
     }
@@ -55,10 +56,11 @@ class CoursesMod{
     }
 
     public function getByAttribute($col, $val) {
-        $sql = $this->conn->prepare('SELECT COUNT(id_course), id_course, name, description, date_start, date_end, active FROM courses WHERE ? = ?');
-        $sql->bind_param('ss', $col, $val);        
-        $sql->execute();
-        $res = $this->transformData($sql);
+        $sql = 'SELECT COUNT(id_course), id_course, name, description, date_start, date_end, active FROM courses WHERE '.$col.' = ?';        
+        $sql = $this->conn->prepare($sql);
+        $sql->bind_param('s', $val);        
+        $sql->execute();        
+        $res = $this->transformData($sql);        
         $sql->close();
         return $res;
     }
@@ -74,29 +76,29 @@ class CoursesMod{
 
     //SELECT BY ATTRIBUTE
 
-    public function getById(int $id){
-        return $this->getByAttribute('id_course',$id);
+    public function getById( $value){
+        return $this->getByAttribute('id_course',$value);        
     }
-    public function getByName(int $name){
-        return $this->getByAttribute('name',$name);
+    public function getByName($value){
+        return $this->getByAttribute('name',$value);                
     }
-    public function getByStatus($active){
+    public function getByStatus(int $active){
         return $this->getByAttribute('active',$active);
     }
-    public function getByDateStart($date){
+    public function getByDateStart(strin $date){
         return $this->getByAttribute('date_start',$date);
     }
-    public function getByDateEnd($date){
+    public function getByDateEnd(string $date){
         return $this->getByAttribute('date_start',$date);
     }    
 
     //INSERT
-    public function insertValues($name, $description, $date_start, $date_end, $active)
+    public function insertValues(string $name, string $description, string $date_start, string $date_end, int $active)
     {
-        $sql = $his->conn->prepare('INSERT INTO courses (name, description, date_start, date_end, active) VALUES (?,?,?,?,?)');
-        $sql->bind_param('sssss', $name, $description, $date_start, $date_end, $active);
+        $sql = $this->conn->prepare('INSERT INTO courses (name, description, date_start, date_end, active) VALUES (?,?,?,?,?)');
+        $sql->bind_param('ssssi', $name, $description, $date_start, $date_end, $active);
         $sql->execute();
-        $res->$sql->affected_rows;
+        $res=$sql->affected_rows;
         $sql->close();
         return $res;
     }
@@ -104,20 +106,20 @@ class CoursesMod{
     //UPDATE
 
     public function updateValueById($attribute, $new_value, $id){
-        $sql = $his->conn->prepare('UPDATE courses SET ? = ? WHERE id_course = ?');
+        $sql = $this->conn->prepare('UPDATE courses SET ? = ? WHERE id_course = ?');
         $sql->bind_param('sss', $attribute, $new_value, $id);
         $sql->execute();
-        $res->$sql->affected_rows;
+        $res=$sql->affected_rows;
         $sql->close();
         return $res;
     }
 
     //DELETE int $mysqli->affected_rows;
     public function deleteById($id){
-        $sql = $his->conn->prepare("DELETE FROM courses WHERE id_course = ?");
+        $sql = $this->conn->prepare("DELETE FROM courses WHERE id_course = ?");
         $sql->bind_param('s', $id);
         $sql->execute();
-        $res->$sql->affected_rows;
+        $res=$sql->affected_rows;
         $sql->close();
         return $res;
     }

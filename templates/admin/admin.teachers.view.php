@@ -19,7 +19,7 @@
     <?php
         require_once('admin.teachers.var.php');
         
-        if(isset(AdminTeachers::$errormsg)){echo('<div class="errmsg">'.AdminTeachers::$errormsg.'</div>');}
+        if(isset(AdminTeachers::$errormsg)){echo('<div class="errmsg">'.AdminTeachers::$errormsg.'</div>');AdminTeachers::$errormsg=null;}
     ?>
 
 </div>

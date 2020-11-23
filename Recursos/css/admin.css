@@ -1,0 +1,15 @@
+.descriptio{
+    display: block;
+    width: 80%;
+    text-align: justify;
+}
+.curse-input {
+    display: inline-block;
+    width: auto;
+    align-self: baseline;
+    padding: 20px;
+}
+
+.description{
+    display: block;
+}

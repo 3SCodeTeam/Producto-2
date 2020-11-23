@@ -27,6 +27,8 @@ class LogInChecker{
         if($this->user_data != 0){            
             if($this->userExist()&&$this->passMatch()){                
                $_SESSION['user_id']=password_hash($_POST['pass'], PASSWORD_BCRYPT);
+               $user_data->pass = null;
+               $GLOBALS['user_data']=$user_data;
                return $this->callUserTemplate();
             }
         }
