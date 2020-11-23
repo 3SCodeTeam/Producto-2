@@ -1,9 +1,11 @@
 <?php
 include_once 'includes/autoloader.inc.php';
 include_once 'views/admin.var.php';
-include_once 'templates/admin.teachers.var.php';
+include_once 'templates/admin/admin.teachers.var.php';
+include_once 'templates/admin/admin.menu.var.php';
+include_once 'templates/admin/admin.courses.var.php';
 include_once 'modules/teachers.mod.class.php';
-include_once 'modules/teacher.admin.class.php';
+include_once 'modules/createNewValues.admin.class.php';
 
 class AdminController{
 
@@ -23,16 +25,36 @@ class AdminController{
     }
 
     public function teacherPost(){
-        $createTeacher = new TeacherAdd();        
-        If($createTeacher->createTeacher()){
-            AdminVar::activeMenu('teacher');
+        AdminVar::activeMenu('teacher');
+        $createTeacher = new createNewValue();                
+        If($createTeacher->createTeacher()){        
             AdminTeachers::$errormsg="Datos registrados.";            
             require_once("views/admin.view.php");
-        }else{            
-            AdminVar::activeMenu('teacher');            
+        }else{                                    
             AdminTeachers::$errormsg=$createTeacher->err;            
             require_once("views/admin.view.php");
         }
+    }
+
+    public function courses(){
+        AdminMenu::$menu='courses';
+        AdminVar::activeMenu('courses');
+        require_once('views/admin.view.php');
+    }
+    public function coursePost(){
+        $createCourse = new createNewValue();        
+        AdminVar::activeMenu('courses');
+        if($createCourse->createCourse()){
+            AdminCourses::$errormsg="Datos registrados";
+            require_once("views/admin.view.php");
+        }else{
+            AdminCourses::$errormsg=$createCourse->err;
+            require_once("views/admin.view.php");
+        }
+    }
+
+    public function courseActivation(){
+
     }
 }
 ?>
