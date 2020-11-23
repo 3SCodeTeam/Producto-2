@@ -75,15 +75,33 @@ class TeachersMod{
     //SELECT BY ATTRIBUTE
 
     public function getById(int $id){
-        $this->getByAttribute('id_teacher',$id);
+        //return $this->getByAttribute('id_teacher',$id);
+        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE id_teacher = ?');
+        $sql->bind_param('s', $id);        
+        $sql->execute();
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }
 
-    public function getByEmail(int $email){
-        $this->getByAttribute('email',$email);
+    public function getByEmail($email){
+        //return $this->getByAttribute('email',$email);
+        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE email = ?');
+        $sql->bind_param('s', $email);        
+        $sql->execute();
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }
 
     public function getByNIF($nif){
-        $this->getByAttribute('nif',$nif);
+        //return $this->getByAttribute('nif',$nif);
+        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE nif = ?');
+        $sql->bind_param('s', $nif);        
+        $sql->execute();
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }    
 
     //INSERT

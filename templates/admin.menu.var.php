@@ -1,4 +1,4 @@
 <?php
-class AdmintMenu{
+class AdminMenu{
     public static $menu;    
 }

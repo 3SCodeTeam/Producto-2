@@ -75,19 +75,19 @@ class CoursesMod{
     //SELECT BY ATTRIBUTE
 
     public function getById(int $id){
-        $this->getByAttribute('id_course',$id);
+        return $this->getByAttribute('id_course',$id);
     }
     public function getByName(int $name){
-        $this->getByAttribute('name',$name);
+        return $this->getByAttribute('name',$name);
     }
     public function getByStatus($active){
-        $this->getByAttribute('active',$active);
+        return $this->getByAttribute('active',$active);
     }
     public function getByDateStart($date){
-        $this->getByAttribute('date_start',$date);
+        return $this->getByAttribute('date_start',$date);
     }
     public function getByDateEnd($date){
-        $this->getByAttribute('date_start',$date);
+        return $this->getByAttribute('date_start',$date);
     }    
 
     //INSERT

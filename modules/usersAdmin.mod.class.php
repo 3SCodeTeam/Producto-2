@@ -3,17 +3,15 @@ include_once 'includes/autoloader.inc.php';
 
 class usersAdminMod{
     private $conn;
-    private $id_user_admin;
-    private $username;
-    private $name;
-    private $email;
-    private $password;
 
-    public function __construct() {
+    public function __construct(){
+                
         //parent::__construct();
-        //$this->con = parent::dbconn();
+        //$this->conn = parent::dbconn();
+        //parent::__construct('students');
         $dbconnection = new DBconnection();
-        $this->conn = $dbconnection->dbconn();        
+        $this->conn = $dbconnection->dbconn();
+        
     }
 
     function transformData($res){        
@@ -27,16 +25,16 @@ class usersAdminMod{
             $name,
             $email,
             $pass,            
-        );
-        while($res->fetch()){
-            if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.
+        );        
+        while($res->fetch()){            
             $user = new Admin();
-            $user->count=$count;
+            $user->count=$count;            
             $user->id_user_admin = $id;            
             $user->email=$email;
             $user->name=$name;            
             $user->pass=$pass;            
-            $user->username=$username;
+            $user->username=$username;            
+            if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.
             $data[] = $user;            
         }        
         return $data;
@@ -50,12 +48,14 @@ class usersAdminMod{
         return $res;
     }
 
-    public function getByAttribute($col, $val) {
-        $sql = $this->conn->prepare('SELECT count(id_user_admin), id_user_admin, username, name, email, password  FROM users_admin WHERE ? = ?');
-        $sql->bind_param('ss', $col, $val);        
-        $sql->execute();
+    /*REVISAR PQ NO FUNCIONA ESTA FUNCIÓN
+    
+    public function getByAttribute(string $col, string $val) { 
+        $sql = $this->conn->prepare("SELECT count(id_user_admin), id_user_admin, username, name, email, password FROM users_admin WHERE ? = '?'");
+        $sql->bind_param('ss', $col, $val);
+        $sql->execute();        
         $res = $this->transformData($sql);
-        $sql->close();
+        $sql->close();        
         return $res;
     }
 
@@ -67,17 +67,35 @@ class usersAdminMod{
         $sql->close();
         return $res;
     }
-
+    */
     public function getById(int $id) {
-        return getByAttribute('id_user_admin', $id);
+        //$this->getByAttribute('id_user_admin', $id);
+        $sql = $this->conn->prepare('SELECT count(id_user_admin), id_user_admin, username, name, email, password FROM users_admin WHERE id_user_admin = ?');        
+        $sql->bind_param("s", $id);
+        $sql->execute();        
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }
 
-    public function getByUsername($username) {
-        return getByAttribute('username', $username);
+    public function getByUsername(string $username) {
+        //return $this->getByAttribute('username', $username);
+        $sql = $this->conn->prepare('SELECT count(id_user_admin), id_user_admin, username, name, email, password FROM users_admin WHERE username = ?');        
+        $sql->bind_param("s", $username);
+        $sql->execute();        
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }
 
     public function getByEmail($email) {
-        return getByAttribute('email', $email);
+        //$this->getByAttribute('email', $email);
+        $sql = $this->conn->prepare('SELECT count(id_user_admin), id_user_admin, username, name, email, password FROM users_admin WHERE email = ?');        
+        $sql->bind_param("s", $email);
+        $sql->execute();        
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
     }
 
     public function checkPassMatch($username, $hash) {
