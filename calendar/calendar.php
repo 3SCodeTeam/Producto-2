@@ -137,4 +137,29 @@ function getMonthName($month) {
     return $monthName;
 }
 
+// Funcion mostrar LEYENDA
+function leyendaDaw(){
+    $clases = [];
+    $clases[0] = 'Programacion';
+    $clases[1] = 'Bases de datos';
+    $clases[2] = 'Diseño grafico';
+    $clases[3] = 'Aplicaciones escritorio';
+    $clases[4] = 'Aplicaciones web';
+    echo '<table><td><strong>Clases:</strong></td></table>';
+    $array = implode('<br>', $clases);
+    echo $array;
+}
+
+function leyendaDam(){
+    $clases = [];
+    $clases[0] = 'Programacion';
+    $clases[1] = 'Bases de datos';
+    $clases[2] = 'Ciberseguridad';
+    $clases[3] = 'Aplicaciones escritorio';
+    $clases[4] = 'Aplicaciones moviles';
+    echo '<table><td><strong>Clases:</strong></td></table>';
+    $array = implode('<br>', $clases);
+    echo $array;
+}
+
 ?>

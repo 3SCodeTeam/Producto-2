@@ -19,6 +19,7 @@
             $year = date("Y", $actualTime);
         }
         displayCalendar($month, $year);
+        leyendaDaw();
     ?>
     </div>
 </body>
