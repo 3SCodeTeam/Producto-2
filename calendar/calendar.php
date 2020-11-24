@@ -137,7 +137,7 @@ function getMonthName($month) {
     return $monthName;
 }
 
-// Funcion mostrar LEYENDA
+// Funcion mostrar LEYENDA DAW
 function leyendaDaw(){
     $clases = [];
     $clases[0] = 'Programacion';
@@ -150,6 +150,7 @@ function leyendaDaw(){
     echo $array;
 }
 
+// Funcion mostrar LEYENDA DAM
 function leyendaDam(){
     $clases = [];
     $clases[0] = 'Programacion';

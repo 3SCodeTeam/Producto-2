@@ -19,6 +19,14 @@
             $year = date("Y", $actualTime);
         }
         displayCalendar($month, $year);
+
+        // Añado LEYENDA con las asignaturas por alumno
+        // if ($student.id_course = 1){
+        //     leyendaDaw();
+        // }
+        // else {
+        //     leyendaDam();
+        // }
         leyendaDaw();
     ?>
     </div>
