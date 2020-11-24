@@ -1,4 +1,8 @@
 <?php
+if(!isset($_SESSION)){
+    session_start();
+}
+
 include_once 'includes/autoLoader.inc.php';
 class Router{
     
@@ -25,7 +29,7 @@ class Router{
                 $this->controller = new SignInController();
                 break;
             case 'student':
-                if(!isset($_SESSION['user_id'])){
+                if(!isset($_SESSION['token'])){
                     return $this->callErr('Debes iniciar sesión.');
                 }else{
                     require_once('controllers/'.$this->controller.'.ctrl.php'); //MIRAR /controllers/student.ctrl.php
@@ -38,7 +42,7 @@ class Router{
                 }
             break;*/
             case 'admin':                
-                if(!isset($_SESSION['user_id'])){
+                if(!isset($_SESSION['token'])){
                     return $this->callErr('Debes iniciar sesión.');
                 }else{
                     require_once('controllers/'.$this->controller.'.ctrl.php'); //MIRAR /controllers/admin.ctrl.php

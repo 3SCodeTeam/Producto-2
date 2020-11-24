@@ -53,8 +53,9 @@ class ScheduleMod{
     }
 
     public function getByAttribute($col, $val) {
-        $sql = $this->conn->prepare('SELECT count(id_schedule), id_schedule, id_class, time_start, time_end, day FROM schedule WHERE ? = ?');
-        $sql->bind_param('ss', $col, $val);        
+        $stm = "SELECT count(id_schedule), id_schedule, id_class, time_start, time_end, day FROM schedule WHERE ".$col." = ?";
+        $sql = $this->conn->prepare($stm);
+        $sql->bind_param('s',$val);        
         $sql->execute();
         $res = $this->transformData($sql);
         $sql->close();
@@ -62,8 +63,9 @@ class ScheduleMod{
     }
 
     public function getByAttributes($col1, $col2, $val1, $val2, string $operator) {
-        $sql = $this->conn->prepare('SELECT count(id_schedule), id_schedule, id_class, time_start, time_end, day FROM schedule WHERE ? = ? ? ? = ?');
-        $sql->bind_param('sssss', $col1, $val1, $operator, $col2, $val2);        
+        $stm = "SELECT count(id_schedule), id_schedule, id_class, time_start, time_end, day FROM schedule WHERE ".$col1." = ? ".$operator." ".$col2." = ?";
+        $sql = $this->conn->prepare($stm);
+        $sql->bind_param('ss',$val1, $val2);        
         $sql->execute();
         $res = $this->transformData($sql);
         $sql->close();
@@ -84,7 +86,8 @@ class ScheduleMod{
     }
 
     public function updateValue($attribute, $new_value, $col, $val) {
-        $sql = $this->conn->prepare('UPDATE schedule SET ? = ? WHERE ? = ?');
+        $stm = "UPDATE schedule SET ".$attribute." = ? WHERE ".$col." = ?";
+        $sql = $this->conn->prepare($stm);
         $sql->bind_param('ssss', $attribute, $new_value, $col, $val);
         $sql->execute();
         $res = $sql->affected_rows;
@@ -93,7 +96,8 @@ class ScheduleMod{
     }
 
     public function updateValueById($attribute, $new_value, $id) {
-        $sql = $this->conn->prepare('UPDATE schedule SET ? = ? WHERE id_schedule = ?');
+        $stm = "UPDATE schedule SET ".$attribute." = ? WHERE id_schedule = ?";
+        $sql = $this->conn->prepare($stm);
         $sql->bind_param('sss', $attribute, $new_value, $id);
         $sql->execute();
         $res = $sql->affected_rows;

@@ -1,11 +1,17 @@
 <?php
+if(!isset($_SESSION)){
+    session_start();
+}
 include_once 'includes/autoloader.inc.php';
 include_once 'views/admin.var.php';
 include_once 'templates/admin/admin.teachers.var.php';
 include_once 'templates/admin/admin.menu.var.php';
 include_once 'templates/admin/admin.courses.var.php';
+include_once 'templates/admin/admin.profile.var.php';
 include_once 'modules/teachers.mod.class.php';
 include_once 'modules/createNewValues.admin.class.php';
+include_once 'modules/usersAdmin.mod.class.php';
+include_once 'modules/updateData.class.php';
 
 class AdminController{
 
@@ -56,6 +62,19 @@ class AdminController{
     public function courseActivation(){
 
     }
+
+    public function profile(){
+        AdminMenu::$menu='profile';
+        AdminVar::activeMenu('profile');        
+        require_once('views/admin.view.php');
+    }
+
+    public function profilePost(){        
+        $updateProfile = new updateData('admin');        
+        $updateProfile->updateAdminData();
+        AdminVar::activeMenu('profile');
+        AdminProfile::$errormsg=$updateProfile->err;        
+        require_once("views/admin.view.php");
+    }
 }
 ?>
-

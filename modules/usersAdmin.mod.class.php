@@ -117,7 +117,8 @@ class usersAdminMod{
     }
 
     public function updateValue($attribute, $new_value, $col, $val) {
-        $sql = $this->conn->prepare('UPDATE users_admin SET ? = ? WHERE ? = ?');
+        $stm = "UPDATE users_admin SET ".$atrribute." = ? WHERE ".$col." = ?";
+        $sql = $this->conn->prepare($stm);
         $sql->bind_param('ssss', $attribute, $new_value, $col, $val);
         $sql->execute();
         $res = $sql->affected_rows;
@@ -125,12 +126,14 @@ class usersAdminMod{
         return $res;
     }
 
-    public function updateValueById($attribute, $new_value, $id) {
-        $sql = $this->conn->prepare('UPDATE users_admin SET ? = ? WHERE id_user_admin = ?');
-        $sql->bind_param('sss', $attribute, $new_value, $id);
+    public function updateValueById($attribute, $new_value, $id) {        
+        $stm = "UPDATE users_admin SET ".$attribute." = ? WHERE id_user_admin = ?";
+        $sql = $this->conn->prepare($stm);        
+        $sql->bind_param('ss', $new_value, $id);        
         $sql->execute();
         $res = $sql->affected_rows;
         $sql->close();
+        echo($res);
         return $res;
     }
 

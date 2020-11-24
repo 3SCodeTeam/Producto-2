@@ -13,3 +13,17 @@
 .description{
     display: block;
 }
+.profile-data-container{
+    text-align: center;
+}
+.profile-data{
+    display: inline-block;
+    text-align: center;
+    border-bottom: solid thin black;
+    padding: 5px;
+    width: 500px;
+}
+.profile-form.input-field{
+    width: 400px;
+
+}

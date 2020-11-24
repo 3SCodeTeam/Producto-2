@@ -8,6 +8,7 @@ class Admin{
     public $id_user_admin;
     public $name;
     public $pass;
-    public $username;    
+    public $username;  
+    public $id;  
 }
 ?>
