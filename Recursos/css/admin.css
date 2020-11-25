@@ -86,7 +86,7 @@
 
 
 .courses-table-div td{
-    border thin solid black;
+    border: thin solid black;
 }
 
 .courses-table-div th{
