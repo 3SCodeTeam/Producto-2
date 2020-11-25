@@ -49,7 +49,7 @@ class updateData{
                     return false;
                 }
                 $res = $this->mod->getByUsername($this->dataStore);
-                if($res[0]->count > 0){
+                if(count($res) > 0){
                     $this->res = "No se puede actualizar. Este NIF ya ha sido registrado.";
                     return false;
                 }
@@ -98,7 +98,7 @@ class updateData{
             return false;
         }
         $res = $this->mod->getByUsername($this->dataStore);        
-        if($res[0]->count > 0){
+        if(count($res) > 0){
             $this->err = "No se puede actualizar. Este nombre de usuario ya ha sido registrada.";
             return false;
         }
@@ -130,7 +130,7 @@ class updateData{
             return false;
         }
         $res = $this->mod->getByEmail($this->dataStore);
-        if($res[0]->count > 0){
+        if(count($res) > 0){
             $this->err = "Esta dirección de correo ya ha sido registrada.";
             return false;
         }
@@ -145,7 +145,7 @@ class updateData{
     }
     private function checkPass(){
         $res = $this->mod->getById($this->userId);
-        if($res[0]->count == 0){
+        if(count($res) == 0){
             $this->err = "Error al ejecutar la consulta. No se ha podido realizar la actualización.";
             return false;
         }

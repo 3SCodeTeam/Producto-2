@@ -24,8 +24,7 @@ class ListOfTeachers{
         $this->teachersList = $this->mod->getAll();        
     }
 
-    public function tableOfTeachers(){  
-        echo(count($this->teachersList))      ;
+    public function tableOfTeachers(){          
         if(!isset($this->teachersList)){
             return $this->printMsg("err-msg", "Error de conexión con la base de datos.");                        
         }

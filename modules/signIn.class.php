@@ -55,15 +55,15 @@ class SignIn {
 
     private function checkUsername(){
         if(ctype_alnum($_POST['username'])){
-            $res = $this->mod->getByUsername($_POST['username']);            
+            $res = $this->mod->getByUsername($_POST['username']);
+            if(strlen($_POST['username'])<6){
+                $this->errmsg ="El nombre de usuario no cumple las especificaciones.";
+                return false;
+            }
             if(isset($res[0]->id)){ //Verificamos q el nombre no existe.
                 $this->errmsg = 'Este usuario ya está registrado.';
                 return false;
             }
-            if(strlen($_POST['username'])<6){
-                $this->errmsg ="El nombre de usuario no cumple las especificaciones.";
-                return false;
-            }               
             $this->username = $_POST['username'];
             return true;         
         }  

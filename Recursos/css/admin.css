@@ -71,3 +71,34 @@
     
 }
 /*TEACHER ENDS*/
+
+/*COURSES*/
+.courses-table-div{
+    display: block;    
+    margin: 2%;        
+    
+}
+.courses-table-div table{
+    width: 95%;
+    border: thin solid black;
+    
+}
+
+
+.courses-table-div td{
+    border thin solid black;
+}
+
+.courses-table-div th{
+    text-align: center;
+    border: solid black;
+}
+
+
+
+/*COURSES ENDS*/
+
+
+
+
+

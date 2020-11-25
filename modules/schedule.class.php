@@ -1,8 +1,7 @@
 <?php
 include_once 'includes/autoloader.inc.php';
 
-class Schedule{   
-    public $count;
+class Schedule{       
     public $day;
     public $id_class;
     public $id_schedule;

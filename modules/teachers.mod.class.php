@@ -13,7 +13,7 @@ class TeachersMod{
     function transformData($res){                        
         //SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers
         //Ajustar las variables al orden.
-        $data = array();        
+        $data = array();
         $res->bind_result(            
             $id,
             $name,

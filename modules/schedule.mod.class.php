@@ -18,20 +18,17 @@ class ScheduleMod{
 
     function transformData($res){          
         $data=[];        
-        //"SELECT count(id_schedule), id_schedule, id_class, time_start, time_end, day FROM schedule'
+        //"SELECT  id_schedule, id_class, time_start, time_end, day FROM schedule'
         //Ajustar las variables al orden.
-        $res->bind_result(
-            $count,
+        $res->bind_result(            
             $id,
             $id_class,
             $time_start,
             $time_end,
             $day,            
         );
-        while($res->fetch()){
-            if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.
-            $user = new Schedule();
-            $user->count=$count;
+        while($res->fetch()){            
+            $user = new Schedule();            
             $user->id_schedule = $id;            
             $user->id_class=$id_class;
             $user->time_start=$time_start;            
@@ -44,7 +41,7 @@ class ScheduleMod{
         
 
     public function getAll() {
-        $sql = $this->conn->prepare('SELECT count(id_schedule), id_schedule, id_class, time_start, time_end, day FROM schedule');
+        $sql = $this->conn->prepare('SELECT  id_schedule, id_class, time_start, time_end, day FROM schedule');
         $res = $sql->execute();
         $sql->execute();
         $res = $this->transformData($sql);
@@ -53,7 +50,7 @@ class ScheduleMod{
     }
 
     public function getByAttribute($col, $val) {
-        $stm = "SELECT count(id_schedule), id_schedule, id_class, time_start, time_end, day FROM schedule WHERE ".$col." = ?";
+        $stm = "SELECT  id_schedule, id_class, time_start, time_end, day FROM schedule WHERE ".$col." = ?";
         $sql = $this->conn->prepare($stm);
         $sql->bind_param('s',$val);        
         $sql->execute();
@@ -63,7 +60,7 @@ class ScheduleMod{
     }
 
     public function getByAttributes($col1, $col2, $val1, $val2, string $operator) {
-        $stm = "SELECT count(id_schedule), id_schedule, id_class, time_start, time_end, day FROM schedule WHERE ".$col1." = ? ".$operator." ".$col2." = ?";
+        $stm = "SELECT  id_schedule, id_class, time_start, time_end, day FROM schedule WHERE ".$col1." = ? ".$operator." ".$col2." = ?";
         $sql = $this->conn->prepare($stm);
         $sql->bind_param('ss',$val1, $val2);        
         $sql->execute();

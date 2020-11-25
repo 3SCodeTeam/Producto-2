@@ -22,7 +22,7 @@ include_once 'includes/autoloader.inc.php';
                 $this->err = "Error de conexión a la base de datos.";
                 return false;
             }            
-            if($name[0]->count > 0){
+            if(count($name) > 0){
                 $this->err = "El nombre del curso ya existe.";
                 return false;
             }

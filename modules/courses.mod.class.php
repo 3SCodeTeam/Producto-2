@@ -11,11 +11,10 @@ class CoursesMod{
     }
 
     function transformData($res){          
-        $data=[];        
-        //SELECT COUNT(id_course), id_course, name, description, date_start, date_end, active FROM courses
+        $data = array();   
+        //SELECT id_course, name, description, date_start, date_end, active FROM courses
         //Ajustar las variables al orden.
-        $res->bind_result(
-            $count,
+        $res->bind_result(            
             $id,
             $name,
             $description,
@@ -23,10 +22,8 @@ class CoursesMod{
             $date_end,
             $active,
         );
-        while($res->fetch()){
-            if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.  
-            $user = new Course();
-            $user->count=$count;
+        while($res->fetch()){            
+            $user = new Course();            
             $user->id_course = $id;            
             $user->name=$name;
             $user->description=$description;
@@ -35,7 +32,7 @@ class CoursesMod{
             $user->active=$active;
             $data[] = $user;
             
-        }        
+        }         
         return $data;
     }
     
@@ -48,7 +45,7 @@ class CoursesMod{
 
     //SELECT
     public function getAll(){        
-        $sql = $this->conn->prepare('SELECT COUNT(id_course), id_course, name, description, date_start, date_end, active FROM courses');
+        $sql = $this->conn->prepare('SELECT id_course, name, description, date_start, date_end, active FROM courses order by date_start');
         $sql->execute();
         $res = $this->transformData($sql);
         $sql->close();
@@ -56,8 +53,8 @@ class CoursesMod{
     }
 
     public function getByAttribute($col, $val) {
-        $sql = 'SELECT COUNT(id_course), id_course, name, description, date_start, date_end, active FROM courses WHERE '.$col.' = ?';        
-        $sql = $this->conn->prepare($sql);
+        $stm = 'SELECT id_course, name, description, date_start, date_end, active FROM courses WHERE '.$col.' = ?';        
+        $sql = $this->conn->prepare($stm);
         $sql->bind_param('s', $val);        
         $sql->execute();        
         $res = $this->transformData($sql);        
@@ -66,8 +63,9 @@ class CoursesMod{
     }
 
     public function getByAttributes($col1, $col2, $val1, $val2, string $operator) {
-        $sql = $this->conn->prepare('SELECT COUNT(id_course), id_course, name, description, date_start, date_end, active FROM courses WHERE ? = ? ? ? = ?');
-        $sql->bind_param('sssss', $col1, $val1, $operator, $col2, $val2);        
+        $stm = 'SELECT id_course, name, description, date_start, date_end, active FROM courses WHERE '.$col1.' = ? '.$operator.' '.$col2.' = ?';
+        $sql = $this->conn->prepare($stm);
+        $sql->bind_param('ss', $val1, $val2);        
         $sql->execute();
         $res = $this->transformData($sql);
         $sql->close();
@@ -106,8 +104,9 @@ class CoursesMod{
     //UPDATE
 
     public function updateValueById($attribute, $new_value, $id){
-        $sql = $this->conn->prepare('UPDATE courses SET ? = ? WHERE id_course = ?');
-        $sql->bind_param('sss', $attribute, $new_value, $id);
+        $stm = 'UPDATE courses SET '.$attribute.' = ? WHERE id_course = ?';
+        $sql = $this->conn->prepare($stm);
+        $sql->bind_param('ss', $new_value, $id);
         $sql->execute();
         $res=$sql->affected_rows;
         $sql->close();
