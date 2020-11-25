@@ -28,8 +28,8 @@ class LogInChecker{
             if($this->userExist()&&$this->passMatch()){                
                 if(!isset($_SESSION)){
                     session_start();
-                }
-               $_SESSION['token']=password_hash($_SESSION['user_id'], PASSWORD_BCRYPT);
+                }               
+               $_SESSION['token']=password_hash($_COOKIE['PHPSESSID'], PASSWORD_BCRYPT);
                switch ($this->tipo) {
                 case 'student':
                     $_SESSION['sql_user_id']=$this->user_data[0]->id;

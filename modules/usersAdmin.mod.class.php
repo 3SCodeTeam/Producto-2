@@ -34,7 +34,7 @@ class usersAdminMod{
             $user->name=$name;            
             $user->pass=$pass;            
             $user->username=$username;            
-            if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.
+            //if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.
             $data[] = $user;            
         }        
         return $data;
@@ -132,8 +132,7 @@ class usersAdminMod{
         $sql->bind_param('ss', $new_value, $id);        
         $sql->execute();
         $res = $sql->affected_rows;
-        $sql->close();
-        echo($res);
+        $sql->close();        
         return $res;
     }
 

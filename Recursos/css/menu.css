@@ -1,4 +1,4 @@
-a{    
+.item a{    
     color: white;
     font-size: xx-large;    
     font-family: 'Times New Roman', Times, serif;
@@ -23,12 +23,15 @@ a{
     vertical-align: middle;
     font-size: x-large;
 }
-.item.selected{
-    color: black;
-
-}
 .item:hover{
     text-shadow: black;
     border-top: white solid;
     border-bottom: white solid;    
+}
+.item.selected:hover{
+    border: none;
+}
+.item.selected a{
+    color: black;
+ 
 }

@@ -15,7 +15,7 @@
                 <input class="course-form-input" type="date" name="date_end" placeholder="Fecha fin de curso" required/>
                 </div><div class="curse-input description">
                 <label for="description">Descripción</label><br>
-                <input class="course-form-input" type="textarea" name="description" placeholder="Descripción..." required/>
+                <input class="course-form-input description" type="textarea" name="description" placeholder="Descripción..." required/>
                 </div>
             </div>        
             <div>

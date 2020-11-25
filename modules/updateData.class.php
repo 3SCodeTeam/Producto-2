@@ -18,9 +18,11 @@ class updateData{
     ){}
 
     public function updateAdminData(){
-        $this->mod = new usersAdminMod();                
+        $this->mod = new usersAdminMod();
         $this->userId = $_SESSION['user_data']->id_user_admin;
-        $this->initDataUpdate();
+        if(!$this->initDataUpdate()){
+            return false;
+        };
         switch ($this->param) {
             case 'email': return $this->checkEmail();                            
             case 'name': return $this->checkName();            
@@ -31,7 +33,9 @@ class updateData{
     public function updateStudentData(){
         $this->mod = new Students();
         $this->userId = $_SESSION['user_data']->id;
-        $this->initDataUpdate();
+        if(!$this->initDataUpdate()){
+            return false;
+        };
         switch ($this->param) {
             case 'email':
                 return $this->checkEmail();
@@ -89,13 +93,13 @@ class updateData{
         }
     }
     private function checkUsername(){
-        if($_SESSION['user_data'] === $this->dataStore){
-            $this->res = "El valor propuesto y el actual son identicos.";
+        if($_SESSION['user_data']->username === $this->dataStore){
+            $this->err = "El valor propuesto y el actual son identicos.";
             return false;
         }
-        $res = $this->mod->getByUsername($this->dataStore);
+        $res = $this->mod->getByUsername($this->dataStore);        
         if($res[0]->count > 0){
-            $this->res = "No se puede actualizar. Este nombre de usuario ya ha sido registrada.";
+            $this->err = "No se puede actualizar. Este nombre de usuario ya ha sido registrada.";
             return false;
         }
         //updateValueById($attribute, $new_value, $id)
@@ -108,8 +112,8 @@ class updateData{
         return false;
     }
     private function checkName(){
-        if($_SESSION['user_data'] === $this->dataStore){
-            $this->res = "El valor propuesto y el actual son identicos.";
+        if($_SESSION['user_data']->name === $this->dataStore){
+            $this->err = "El valor propuesto y el actual son identicos.";
             return false;
         }                        
         if($this->mod->updateValueById('name', $this->dataStore, $this->userId)>0){
@@ -121,19 +125,19 @@ class updateData{
         return false;
     }
     private function checkEmail(){
-        if($_SESSION['user_data'] === $this->dataStore){
-            $this->res = "El valor propuesto y el actual son identicos.";
+        if($_SESSION['user_data']->email === $this->dataStore){
+            $this->err = "El valor propuesto y el actual son identicos.";
             return false;
         }
         $res = $this->mod->getByEmail($this->dataStore);
         if($res[0]->count > 0){
-            $this->res = "Esta dirección de correo ya ha sido registrada.";
+            $this->err = "Esta dirección de correo ya ha sido registrada.";
             return false;
         }
         //updateValueById($attribute, $new_value, $id)        
         if($this->mod->updateValueById('email', $this->dataStore, $this->userId)>0){
             $this->err = "Datos actualizados";
-            $_SESSION['user_data']->mail = $this->dataStore;
+            $_SESSION['user_data']->email = $this->dataStore;            
             return true;
         }
         $this->err = "Error al escribir en la base de datos. No se ha relizado ningún cambio.";
@@ -141,30 +145,40 @@ class updateData{
     }
     private function checkPass(){
         $res = $this->mod->getById($this->userId);
-                if(!isset($res[0])||$res[0]->count == 0){
-                    $this->err = "Error al ejecutar la consulta. No se ha podido realizar la actualización.";
-                    return false;
-                }
-                if($res[0] == $this->dataStore){
-                    $this->err = "El valor propuesto y el actual son identicos.";
-                    return false;
-                }
-                if($this->mod->updateValueById('password',$this->dataStore, $this->userId)>0){
-                    $this->err = "Contraseña actualizada.";                    
-                    return true;
-                }
-                $this->err = "Error al escribir en la base de datos. No se ha relizado ningún cambio.";
-                return false;
+        if($res[0]->count == 0){
+            $this->err = "Error al ejecutar la consulta. No se ha podido realizar la actualización.";
+            return false;
+        }
+        if($res[0]->pass == $this->dataStore){
+            $this->err = "El valor propuesto y el actual son identicos.";
+            return false;
+        }
+        if($this->mod->updateValueById('password',$this->dataStore, $this->userId)>0){            
+            $this->err = "Contraseña actualizada.";
+            return true;
+        }
+        $this->err = "Error al escribir en la base de datos. No se ha relizado ningún cambio.";
+        return false;
 
     }
     private function initDataUpdate(){
-        $this->param=$_POST['user_data_option'];
+        $this->param=$_POST['user_data_option'];        
+        if(strlen($_POST['value'])<1){
+            $this->err = "Error. El formulario no contiene ningún dato.";
+            return false;
+        }
         switch($this->param){
-            case 'pass': $this->dataStore = crypt($_POST['value'],'$6$Nodejesquemeentiendan.Guardameelsecreto.');
+            case 'pass': 
+                if(strlen($_POST['value'])<6){
+                    $this->err = "Error: la nueva contrseñea debe tener al menos 6 caracteres.";
+                    return false;
+                }
+                $this->dataStore = crypt($_POST['value'],'$6$Nodejesquemeentiendan.Guardameelsecreto.');                
                 break;
             default:
                 $this->dataStore = $_POST['value'];
         }
+        return true;
     }
 }
 ?>

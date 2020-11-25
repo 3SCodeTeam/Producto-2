@@ -1,4 +1,4 @@
-.descriptio{
+.description{
     display: block;
     width: 80%;
     text-align: justify;
@@ -10,20 +10,64 @@
     padding: 20px;
 }
 
-.description{
-    display: block;
+/*PROFILE ADMIN*/
+
+.admin-profile-container{
+ font-family: arial;   
 }
+
 .profile-data-container{
     text-align: center;
+    border: thin black solid;
+    margin:  2% 0 2% 0;
+    padding: 2% 0 2% 0;
 }
-.profile-data{
-    display: inline-block;
+
+.profile-data{    
+    display: inline-block;    
     text-align: center;
-    border-bottom: solid thin black;
+    font-size: x-large;
     padding: 5px;
     width: 500px;
 }
-.profile-form.input-field{
-    width: 400px;
-
+.profile-data span{
+    padding: 3%;
+    font-size: medium;
+        
 }
+.selector-container select{
+    margin: 2% 0 2% 0;        
+}
+.profile-form.input-field{
+    width: 600px;    
+    border: thin black solid;
+}
+/*PRFILE ENDS*/
+
+/*TEACHER START*/
+.table-teachers-div{
+    margin-top: 25px;
+    border-top: thin solid black;
+    font-family: arial;
+}
+.table-teachers-div a{
+    color:black;
+    text-decoration: none        
+}
+.table-teachers-div table{
+    border: thin, solid, black;
+    width: 95%;
+    margin: 0 2.5%;
+}
+.table-teachers-div th{
+    text-align: center;
+    border: solid;    
+}
+.table-teachers-div td{
+    text-align: left;
+    width: auto;
+    border: thin solid black;
+    padding: 3px 10px 3px 10px
+    
+}
+/*TEACHER ENDS*/

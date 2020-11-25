@@ -1,3 +1,4 @@
+
 <div class="admin-profile-container">
     <H2>Datos del usuario<H2>
     <!--
@@ -8,11 +9,14 @@
     public $pass;
     public $username;
     -->
-    <div class="profile-data-container">
-        <div class="profile-data profile-username"><span>Nombre de usuario: </span><?php echo($_SESSION['user_data']->username);?></div>
-        <div class="profile-data profile-name"><span>Nombre: </span><?php echo($_SESSION['user_data']->name);?></div>
-        <div class="profile-data profile-email"><span>Email: </span><?php echo($_SESSION['user_data']->email);?></div>
-    </div>
+    <?php
+        if(!isset($_SESSION)){session_start();}
+        echo('<div class="profile-data-container">');
+        echo('<div class="profile-data profile-username"><span>Nombre de usuario: </span>'.$_SESSION['user_data']->username.'</div>');
+        echo('<div class="profile-data profile-name"><span>Nombre: </span>'.$_SESSION['user_data']->name.'</div>');
+        echo('<div class="profile-data profile-email"><span>Email: </span>'.$_SESSION['user_data']->email.'</div>');
+        echo('</div>');
+    ?>
     
     <div class="form-container">
         <div class="selector-container">
@@ -25,7 +29,7 @@
             </select>                        
         </div>
         <form action="/?controller=admin&method=profilePost" method="post" id="profile_update">            
-            <input class="profile-form input-field" type="text" id='value' name='value'>
+            <input class="profile-form input-field" type="text" id='value' name='value' required>
         <div>
             <input class="profile-form input-button" type="submit" value="Modificar"/>
         </div>                 
