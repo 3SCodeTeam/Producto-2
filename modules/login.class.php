@@ -1,5 +1,7 @@
 <?php
-
+if(!isset($_SESSION)){
+    session_start();
+} 
 include_once 'includes/autoloader.inc.php';
 include_once 'students.mod.class.php';
 include_once 'usersAdmin.mod.class.php';
@@ -15,20 +17,17 @@ class LogInChecker{
     private $user_data;
 
     public function __construct(){
-        $this->name = $_POST['username'];
-        $this->email= $_POST['email'];
-        $this->pass = crypt($_POST['pass'],'$6$Nodejesquemeentiendan.Guardameelsecreto.');
-        $this->tipo = $_POST['rol_option'];         
+        @$this->name = $_POST['username'];
+        @$this->email= $_POST['email'];
+        @$this->pass = crypt($_POST['pass'],'$6$Nodejesquemeentiendan.Guardameelsecreto.');
+        @$this->tipo = $_POST['rol_option'];         
     }
 
     public function checkUser(){    
         $this->user_data = $this->getUserData();        
         //var_dump($this->user_data);
         if($this->user_data != 0){            
-            if($this->userExist()&&$this->passMatch()){                
-                if(!isset($_SESSION)){
-                    session_start();
-                }               
+            if($this->userExist()&&$this->passMatch()){              
                $_SESSION['token']=password_hash($_COOKIE['PHPSESSID'], PASSWORD_BCRYPT);
                switch ($this->tipo) {
                 case 'student':

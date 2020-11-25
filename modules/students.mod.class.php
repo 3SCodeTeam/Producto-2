@@ -1,4 +1,7 @@
 <?php
+if(!isset($_SESSION)){
+    session_start();
+}
 include_once 'includes/autoloader.inc.php';
 
 class Students{
@@ -14,7 +17,7 @@ class Students{
         $this->conn = $dbconnection->dbconn();
         
     }
-    function transformData($res){              
+    private function transformData($res){              
         $data=[];        
         //"SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username"
         //Ajustar las variables al orden.
@@ -45,11 +48,53 @@ class Students{
         return $data;
     }
 
+    
+
+    public function getClassesOfDay($id, $date){
+        $stm = 'SELECT S.id_class, S.day, S.time_start, S.time_end, C.name, C.color, Co.name FROM schedule as S inner JOIN class as C ON S.id_class=C.id_class INNER JOIN courses as Co ON C.id_course = Co.id_course
+        WHERE Co.id_course IN (SELECT id_course FROM enrollment WHERE id_student = ?) and S.day = ?';
+        $sql = $this->conn->prepare($stm);
+        //var_dump($this->conn);
+        $sql->bind_param('ss', $id, $date);
+        //var_dump($sql);
+        $sql->execute();
+        $res=$this->transformClassData($sql);
+        $sql->close();
+        return $res;        
+    }
+    private function transformClassData($res){
+        $data=[];        
+        //"SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username"
+        //Ajustar las variables al orden.
+        $res->bind_result(            
+            $id_class,
+            $class_day,
+            $class_name,            
+            $class_color,
+            $course_name,
+            $class_time_start,
+            $class_time_end
+        );
+        while($res->fetch()){
+            $item = new DayClasses();
+            $item->id_class = $id_class;
+            $item->class_day = $class_day;
+            $item->class_name = $class_name;
+            $item->class_color = $class_color;
+            $item->course_name = $course_name;
+            $item->class_time_satart=$class_time_start;
+            $item->class_time_end = $class_time_end;
+            $data[] = $item;
+        }        
+        return $data;
+
+    }
+
     public function getAll(){        
         $sql = $this->conn->prepare('SELECT id, date_registered, email, name, nif, pass, surname, telephone, username  FROM students ORDER BY id');
         $sql->execute(); //Ejecutas la consulta con la sentencia preparada
         $res = $this->transformData($sql); //Recuperas un array de datos.
-        var_dump($res); 
+        //var_dump($res); 
         $sql->close(); //Cierras la consulta.
         return $res; //Devuelves los datos.
     }    

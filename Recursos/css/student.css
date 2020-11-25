@@ -1,9 +1,31 @@
-div{
-    margin-top: 10px;
-    color: teal;
-    text-align: justify;
-    font-size: x-small;
+
+#main-container{
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+table{
+    display:inline-table;
+    height: 100%;
+    border: thick black solid;
+    width: 95%;        
+}
+table th{
+    border: thin black solid;     
+}
+td{    
+    border: thin black solid;
+    height: 100px;
+}
+.week-col{
+    width: 50px;
 }
 
+.DOMINGO-col{
+    background-color: lightgray;
+}
+.SÁBADO-col{
+    background-color: lightgray;
+}
 
 
