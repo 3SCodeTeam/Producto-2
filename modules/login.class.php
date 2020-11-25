@@ -26,9 +26,20 @@ class LogInChecker{
         //var_dump($this->user_data);
         if($this->user_data != 0){            
             if($this->userExist()&&$this->passMatch()){                
-               $_SESSION['user_id']=password_hash($_POST['pass'], PASSWORD_BCRYPT);
-               $user_data->pass = null;
-               $GLOBALS['user_data']=$user_data;
+                if(!isset($_SESSION)){
+                    session_start();
+                }               
+               $_SESSION['token']=password_hash($_COOKIE['PHPSESSID'], PASSWORD_BCRYPT);
+               switch ($this->tipo) {
+                case 'student':
+                    $_SESSION['sql_user_id']=$this->user_data[0]->id;
+                    break;
+                case 'admin':                    
+                    $_SESSION['user_data']=$this->user_data[0];
+                    $_SESSION['sql_user_id']=$this->user_data[0]->id_user_admin;
+                    break;
+                }
+                $_SESSION['user_data']->pass=null;
                return $this->callUserTemplate();
             }
         }

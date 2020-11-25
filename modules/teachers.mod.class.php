@@ -10,12 +10,11 @@ class TeachersMod{
         $this->conn = $dbconnection->dbconn();
     }
 
-    function transformData($res){          
-        $data=[];        
+    function transformData($res){                        
         //SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers
         //Ajustar las variables al orden.
-        $res->bind_result(
-            $count,
+        $data = array();        
+        $res->bind_result(            
             $id,
             $name,
             $surname,
@@ -23,10 +22,8 @@ class TeachersMod{
             $nif,
             $email,
         );
-        while($res->fetch()){
-            if($count ==0){return 0;} //Si devuelve 0, no hay datos. row_num de mysqli no siempre devuelve valor.
-            $user = new Teacher();
-            $user->count=$count;
+        while($res->fetch()){              
+            $user = new Teacher();            
             $user->id_teacher = $id;            
             $user->name=$name;
             $user->surname=$surname;            
@@ -35,6 +32,7 @@ class TeachersMod{
             $user->email=$email;
             $data[] = $user;        
         }        
+        
         return $data;
     }
     
@@ -47,7 +45,7 @@ class TeachersMod{
 
     //SELECT
     public function getAll(){        
-        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers');
+        $sql = $this->conn->prepare('SELECT id_teacher, name, surname, telephone, nif, email FROM teachers order by id_teacher');
         $sql->execute();
         $res = $this->transformData($sql);
         $sql->close();

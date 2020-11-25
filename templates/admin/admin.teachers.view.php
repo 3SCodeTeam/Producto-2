@@ -21,5 +21,13 @@
         
         if(isset(AdminTeachers::$errormsg)){echo('<div class="errmsg">'.AdminTeachers::$errormsg.'</div>');AdminTeachers::$errormsg=null;}
     ?>
+    <div class="table-teachers-div">
+        <?php
+            require_once('admin.teachers.view.list.php');
+            $list = new ListOfTeachers("list-teachers");
+            $list->tableOfTeachers();
+        ?>
+    </div>
+    
 
 </div>

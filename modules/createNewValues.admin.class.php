@@ -87,7 +87,8 @@ include_once 'includes/autoloader.inc.php';
                     }
                     $this->dataStore->date_start = $_POST['date_start'];
                     $this->dataStore->date_end = $_POST['date_end'];
-                    $this->dataStore->email = $_POST['date_start'];$this->dataStore->description = $_POST['description'];
+                    $this->dataStore->email = $_POST['date_start'];
+                    $this->dataStore->description = $_POST['description'];
                     $this->dataStore->name = $_POST['name'];
                 break;
             }
