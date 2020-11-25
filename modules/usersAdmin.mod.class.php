@@ -1,4 +1,7 @@
 <?php
+if(!isset($_SESSION)){
+    session_start();
+}
 include_once 'includes/autoloader.inc.php';
 
 class usersAdminMod{
@@ -16,19 +19,17 @@ class usersAdminMod{
 
     function transformData($res){        
         $data=[];        
-        //"SELECT count(id_user_admin), id_user_admin, username, name, email, password FROM users_admin"
+        //"SELECT id_user_admin, username, name, email, password FROM users_admin"
         //Ajustar las variables al orden.
         $res->bind_result(
-            $count,
             $id,
             $username,
             $name,
             $email,
             $pass,            
         );        
-        while($res->fetch()){            
-            $user = new Admin();
-            $user->count=$count;            
+        while($res->fetch()){
+            $user = new Admin();       
             $user->id_user_admin = $id;            
             $user->email=$email;
             $user->name=$name;            
@@ -41,18 +42,17 @@ class usersAdminMod{
     }
 
     public function getAll() {
-        $sql = $this->conn->prepare("SELECT count(id_user_admin), id_user_admin, username, name, email, password FROM users_admin");        
+        $sql = $this->conn->prepare("SELECT id_user_admin, username, name, email, password FROM users_admin");        
         $sql->execute();
         $res = $this->transformData($sql);
         $sql->close();
         return $res;
     }
 
-    /*REVISAR PQ NO FUNCIONA ESTA FUNCIÓN
-    
     public function getByAttribute(string $col, string $val) { 
-        $sql = $this->conn->prepare("SELECT count(id_user_admin), id_user_admin, username, name, email, password FROM users_admin WHERE ? = '?'");
-        $sql->bind_param('ss', $col, $val);
+        $stm = "SELECT id_user_admin, username, name, email, password FROM users_admin WHERE ".$col." = ?";
+        $sql = $this->conn->prepare($stm);
+        $sql->bind_param('s', $val);
         $sql->execute();        
         $res = $this->transformData($sql);
         $sql->close();        
@@ -60,17 +60,18 @@ class usersAdminMod{
     }
 
     public function getByAttributes($col1, $col2, $val1, $val2, string $operator) {
-        $sql = $this->conn->prepare('SELECT count(id_user_admin), id_user_admin, username, name, email, password  FROM users_admin WHERE ? = ? ? ? = ?');
+        $stm = 'SELECT id_user_admin, username, name, email, password  FROM users_admin WHERE '.$col1.' = ? '.$operator.' '.$col2.' = ?';
+        $sql = $this->conn->prepare($stm);
         $sql->bind_param('sssss', $col1, $val1, $operator, $col2, $val2);        
         $sql->execute();
         $res = $this->transformData($sql);
         $sql->close();
         return $res;
     }
-    */
+    
     public function getById(int $id) {
         //$this->getByAttribute('id_user_admin', $id);
-        $sql = $this->conn->prepare('SELECT count(id_user_admin), id_user_admin, username, name, email, password FROM users_admin WHERE id_user_admin = ?');        
+        $sql = $this->conn->prepare('SELECT id_user_admin, username, name, email, password FROM users_admin WHERE id_user_admin = ?');        
         $sql->bind_param("s", $id);
         $sql->execute();        
         $res = $this->transformData($sql);
@@ -80,7 +81,7 @@ class usersAdminMod{
 
     public function getByUsername(string $username) {
         //return $this->getByAttribute('username', $username);
-        $sql = $this->conn->prepare('SELECT count(id_user_admin), id_user_admin, username, name, email, password FROM users_admin WHERE username = ?');        
+        $sql = $this->conn->prepare('SELECT id_user_admin, username, name, email, password FROM users_admin WHERE username = ?');        
         $sql->bind_param("s", $username);
         $sql->execute();        
         $res = $this->transformData($sql);
@@ -90,7 +91,7 @@ class usersAdminMod{
 
     public function getByEmail($email) {
         //$this->getByAttribute('email', $email);
-        $sql = $this->conn->prepare('SELECT count(id_user_admin), id_user_admin, username, name, email, password FROM users_admin WHERE email = ?');        
+        $sql = $this->conn->prepare('SELECT id_user_admin, username, name, email, password FROM users_admin WHERE email = ?');        
         $sql->bind_param("s", $email);
         $sql->execute();        
         $res = $this->transformData($sql);
@@ -99,7 +100,7 @@ class usersAdminMod{
     }
 
     public function checkPassMatch($username, $hash) {
-        $sql = $this->conn->prepare('SELECT count(id_user_admin), id_user_admin, username, name, email, password  FROM users_admin WHERE username = ? AND password = ?');
+        $sql = $this->conn->prepare('SELECT id_user_admin, username, name, email, password  FROM users_admin WHERE username = ? AND password = ?');
         $sql->bind_param('ss', $username, $hash);
         $sql->execute();
         $res = $sql->affected_rows;

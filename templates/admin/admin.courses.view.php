@@ -29,5 +29,14 @@
         
         if(isset(AdminCourses::$errormsg)){echo('<div class="errmsg">'.AdminCourses::$errormsg.'</div>');AdminCourses::$errormsg=null;}
     ?>
-    </div>       
+    </div>
+    <div class="courses-table-div">
+        <?php
+            require_once 'admin.curses.view.list.php';
+            $list = new ListOfCourses('list-courses');
+            $list->tableOfCourses(1);
+            $list->tableOfCourses(0);
+        ?>
+
+    </div>
 </div>

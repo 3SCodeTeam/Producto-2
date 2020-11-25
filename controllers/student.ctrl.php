@@ -1,5 +1,8 @@
 <?php
-class StundentController{
+if(!isset($_SESSION)){
+    session_start();
+}
+class StudentController{
     public function __construct(){
 
     }
