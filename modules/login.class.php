@@ -37,8 +37,8 @@ class LogInChecker{
                     $_SESSION['user_data']=$this->user_data[0];
                     $_SESSION['sql_user_id']=$this->user_data[0]->id_user_admin;
                     break;
-                }
-                $_SESSION['user_data']->pass=null;
+               }
+                $_SESSION['user_data']->pass ='';
                return $this->callUserTemplate();
             }
         }
