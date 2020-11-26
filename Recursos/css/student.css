@@ -17,15 +17,22 @@ td{
     border: thin black solid;
     height: 100px;
 }
-.week-col{
-    width: 50px;
+
+.col{
+    width: 75px;
 }
 
-.DOMINGO-col{
-    background-color: lightgray;
+.week.col.SEMANA{
+    width: 6%;
 }
-.SÁBADO-col{
-    background-color: lightgray;
+
+.col.DOMINGO{
+    background-color: rgba(243, 241, 241, 0.849);
+    width: 5%;
+}
+.col.SÁBADO{
+    background-color: rgba(243, 241, 241, 0.849);
+    width: 5%;
 }
 
 

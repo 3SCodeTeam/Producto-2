@@ -74,12 +74,12 @@ class ScheduleGen{
 
         //TABLA HORARIOS
         for($i =$this->weekNum; $i < $this->weekNum+6; $i++){
-            echo('<tr>');
+            echo('<tr class="row week">');
             foreach($dow as $d){
                 if($d==='SEMANA'){
-                    echo('<td class="week-col"><span>'.$i.'</span></td>');
+                    echo('<td class="week col '.$d.'"><span>'.$i.'</span></td>');
                 }else{
-                    echo('<td class="'.$d.'-col">'.$this->genClassesOfDay($date, $_SESSION['sql_user_id']).'</td>');
+                    echo('<td class="dow col '.$d.'">'.$this->genClassesOfDay($date, $_SESSION['sql_user_id']).'</td>');
                 }            
             $date->add($plus1Day);
             }
@@ -94,7 +94,7 @@ class ScheduleGen{
         $res = $this->mod->getClassesOfDay($date,$id);
         if(count($res)>0){
             foreach($res as $item){
-                echo('<div class="color-'.$item->color.' class-cell"><span>'.$item->name.'</span></div>');
+                echo('<div class="color-'.$item->color.' class cell"><span>'.$item->name.'</span></div>');
             }
         }
     }
