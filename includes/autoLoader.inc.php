@@ -1,5 +1,7 @@
 <?php
-
+if(!isset($_SESSION)){
+    session_start();
+}
 spl_autoload_register('modsAutoloader');
 spl_autoload_register('ctrlAutoloader');
 spl_autoload_register('classAutoloader');
