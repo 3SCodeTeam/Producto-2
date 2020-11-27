@@ -1,5 +1,4 @@
 <?php
-
 spl_autoload_register('modsAutoloader');
 spl_autoload_register('ctrlAutoloader');
 spl_autoload_register('classAutoloader');
@@ -23,6 +22,7 @@ function modsAutoloader($className){
     }
 
     if(!file_exists($fullpath)){
+        
         return false;
     }
 }

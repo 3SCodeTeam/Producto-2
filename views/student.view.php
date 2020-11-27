@@ -13,17 +13,23 @@
         require("Recursos/html/header.html");
         ?>
         <div class= "nav-bar">
-            <?php require_once('templates/student.menu.view.php'); ?>
+            <?php require_once('templates/student/student.menu.view.php'); ?>
         </div>
 
         <div id="main-container">
             <h1>HORARIO</h1>
-            <?php /*INSERTAR CODIGO PHP HORARIO*/
-                require_once('templates/student/student.schedule.view.php');
-                $schedule = new ScheduleGen();
-                $schedule->builSchedule();
+            <?php /*INSERTAR CODIGO PHP HORARIO*/                
+                if(StudentMenu::$menu === 'mSchedule'){                                        
+                    require_once('templates/student/student.schedule.view.php');
+                    $schedule = new ScheduleGen();
+                    $schedule->builSchedule();
+                }                
             ?>
-            <?php /*INSERTAR CODIGO PHP PERFIL*/ ?>
+            <?php /*INSERTAR CODIGO PHP PERFIL*/                 
+                if(Studentmenu::$menu ==='profile'){
+                    require_once('templates/student/student.profile.view.php');                    
+                }
+            ?>
             <?php /*INSERTAR CODIGO PHP MATRICULA*/ ?>
         </div>            
 

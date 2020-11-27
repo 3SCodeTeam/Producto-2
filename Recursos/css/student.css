@@ -1,4 +1,4 @@
-
+/*HORARIO MENSUAL*/
 #main-container{
     display: block;
     font-family: Arial, Helvetica, sans-serif;
@@ -17,15 +17,50 @@ td{
     border: thin black solid;
     height: 100px;
 }
-.week-col{
-    width: 50px;
+
+.col{
+    width: 75px;
 }
 
-.DOMINGO-col{
-    background-color: lightgray;
+.week.col.SEMANA{
+    width: 6%;
 }
-.SÁBADO-col{
-    background-color: lightgray;
+
+.col.DOMINGO{
+    background-color: rgba(243, 241, 241, 0.849);
+    width: 5%;
 }
+.col.SÁBADO{
+    background-color: rgba(243, 241, 241, 0.849);
+    width: 5%;
+}
+/*HORARIO MENSUAL END*/
+
+/*EDICIÓN DATOS PERFIL*/
+.profile-data-container{
+    font-family: arial;    
+    columns: 2;    
+    margin: 3%;
+    align-self: baseline;
+}
+.profile-data{
+    margin: 2%;
+    background-color: pink;
+    
+}
+.profile-data span{
+    padding: 1%
+}
+
+.selector-container select{
+    border: none;
+    border-bottom: thin black solid;
+}
+.form-container{
+    border: solid thin black;
+    padding: 1%;
+}
+/*EDICIÓN DATOS PERFIL END*/
+
 
 

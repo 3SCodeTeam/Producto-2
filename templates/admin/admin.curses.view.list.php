@@ -1,9 +1,7 @@
 <?php
 include_once 'includes/autoloader.inc.php';
 
-if(!isset($_SESSION)){
-    session_start();
-}
+
 class ListOfCourses{
     private $coursesList =[];
     private $tableClass;

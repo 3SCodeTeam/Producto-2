@@ -1,9 +1,6 @@
 <?php
-if(!isset($_SESSION)){
-    session_start();
-}
-
 include_once 'includes/autoLoader.inc.php';
+
 class Router{
     
     private $controller;

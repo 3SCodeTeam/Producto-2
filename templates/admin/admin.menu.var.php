@@ -1,4 +1,5 @@
 <?php
 class AdminMenu{
-    public static $menu;    
+    public static $menu;
+    
 }
