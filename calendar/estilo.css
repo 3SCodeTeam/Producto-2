@@ -1,0 +1,8 @@
+td.weekday {
+	width: 120px;
+}
+
+td.validday, td.invalidday {
+	border: 1px solid black;
+	height: 120px;
+}
