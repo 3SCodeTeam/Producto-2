@@ -4,12 +4,11 @@ include_once 'modules/student.class.php';
 if(!isset($_SESSION)){
     session_start();
 }
-if (isset($_GET['controller'])&&isset($_GET['method'])&&isset($_SESSION['token'])) {
+if (isset($_GET['controller'])&&isset($_GET['method'])) {
     $route = new Router($_GET['controller'], $_GET['method']);
     $route -> call();
 } else {
     $route = new Router('login', 'new');
     $route -> call();
 }
-
 ?>
