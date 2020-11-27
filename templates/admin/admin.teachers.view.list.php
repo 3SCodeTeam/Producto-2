@@ -1,9 +1,7 @@
 <?php
 include_once 'includes/autoloader.inc.php';
 include_once 'modules/teachers.mod.class.php';
-if(!isset($_SESSION)){
-    session_start();
-}
+
 class ListOfTeachers{
     private $teachersList;
     private $tableClass;

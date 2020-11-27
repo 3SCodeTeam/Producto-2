@@ -1,7 +1,7 @@
 <?php
-if(!isset($_SESSION)){
-    session_start();
-}        
+
+include_once 'includes/autoLoader.inc.php'; 
+include_once 'modules/students.mod.class.php';
 class ScheduleGen{
 
 

@@ -1,7 +1,4 @@
 <?php
-if(!isset($_SESSION)){
-    session_start();
-} 
 include_once 'includes/autoloader.inc.php';
 include_once 'students.mod.class.php';
 include_once 'usersAdmin.mod.class.php';
@@ -28,17 +25,17 @@ class LogInChecker{
         //var_dump($this->user_data);
         if($this->user_data != 0){            
             if($this->userExist()&&$this->passMatch()){              
-               $_SESSION['token']=password_hash($_COOKIE['PHPSESSID'], PASSWORD_BCRYPT);
+               $_SESSION['token']=password_hash($_COOKIE['PHPSESSID'], PASSWORD_BCRYPT);               
                switch ($this->tipo) {
                 case 'student':
                     $_SESSION['sql_user_id']=$this->user_data[0]->id;
                     break;
                 case 'admin':                    
-                    $_SESSION['user_data']=$this->user_data[0];
                     $_SESSION['sql_user_id']=$this->user_data[0]->id_user_admin;
                     break;
                }
-                $_SESSION['user_data']->pass ='';
+               $_SESSION['user_data']= $this->user_data[0];                
+               @$_SESSION['user_data']->pass ='';
                return $this->callUserTemplate();
             }
         }

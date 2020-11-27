@@ -157,7 +157,7 @@ class Students{
     
     public function updateValueById($attribute, $new_value, $id){
         $stm = 'UPDATE students SET '.$attribute.' = ? WHERE id = ?';
-        $sql = $his->conn->prepare($stm);
+        $sql = $this->conn->prepare($stm);
         $sql->bind_param('ss', $new_value, $id);
         $sql->execute();
         $res=$sql->affected_rows;
@@ -167,7 +167,7 @@ class Students{
 
     //DELETE int $mysqli->affected_rows;
     public function deleteById($id){
-        $sql = $his->conn->prepare('DELETE FROM students WHERE id = ?');
+        $sql = $this->conn->prepare('DELETE FROM students WHERE id = ?');
         $sql->bind_param('s', $id);
         $sql->execute();
         $res=$sql->affected_rows;

@@ -1,10 +1,10 @@
 <?php
+include_once 'includes/autoLoader.inc.php';
+include_once 'modules/student.class.php';
 if(!isset($_SESSION)){
     session_start();
 }
-include_once 'includes/autoLoader.inc.php';
-
-if (isset($_GET['controller'])&&isset($_GET['method'])) {
+if (isset($_GET['controller'])&&isset($_GET['method'])&&isset($_SESSION['token'])) {
     $route = new Router($_GET['controller'], $_GET['method']);
     $route -> call();
 } else {

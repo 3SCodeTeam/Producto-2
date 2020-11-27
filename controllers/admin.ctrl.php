@@ -1,7 +1,5 @@
 <?php
-if(!isset($_SESSION)){
-    session_start();
-}
+
 include_once 'includes/autoloader.inc.php';
 include_once 'views/admin.var.php';
 include_once 'templates/admin/admin.teachers.var.php';

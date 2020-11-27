@@ -1,10 +1,9 @@
 <?php
 include_once 'modules/admin.class.php';
 include_once 'modules/usersAdmin.mod.class.php';
+include_once 'modules/students.mod.class.php';
 include_once 'includes/autoloader.inc.php';
-if(!isset($_SESSION)){
-    session_start();
-}
+
 class updateData{
     public $err;
     private $dataStore;    

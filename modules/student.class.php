@@ -7,7 +7,7 @@ class Student{
     public $id;
     public $name;
     public $nif;
-    public $pass;
+    public $pas;
     public $surname;
     public $telephone;
     public $username;
