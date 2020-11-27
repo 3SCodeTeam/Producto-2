@@ -17,20 +17,25 @@
         </div>
 
         <div id="main-container">
-            <h1>HORARIO</h1>
-            <?php /*INSERTAR CODIGO PHP HORARIO*/                
-                if(StudentMenu::$menu === 'mSchedule'){                                        
+            <h1><?php echo(strtoupper(StudentMenu::$menu));?></h1>
+            <?php
+            /*INSERTAR CODIGO PHP HORARIO*/                
+                if(StudentMenu::$menu === 'mSchedule'){
                     require_once('templates/student/student.schedule.view.php');
                     $schedule = new ScheduleGen();
                     $schedule->builSchedule();
-                }                
-            ?>
-            <?php /*INSERTAR CODIGO PHP PERFIL*/                 
+                }
+                if(StudentMenu::$menu === 'wSchedule'){require_once('views/error.view.php');} //SEMANAL
+                if(StudentMenu::$menu === 'dSchedule'){require_once('views/error.view.php');} //DIARIO
+            
+                /*INSERTAR CODIGO PHP PERFIL*/                 
                 if(Studentmenu::$menu ==='profile'){
                     require_once('templates/student/student.profile.view.php');                    
                 }
+            
+                /*INSERTAR CODIGO PHP MATRICULA*/ 
+                if(StudentMenu::$menu === 'enrollment'){require_once('views/error.view.php');}
             ?>
-            <?php /*INSERTAR CODIGO PHP MATRICULA*/ ?>
         </div>            
 
         <div class="alert-msg">

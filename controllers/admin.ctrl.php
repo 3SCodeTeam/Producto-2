@@ -74,5 +74,16 @@ class AdminController{
         AdminProfile::$errormsg=$updateProfile->err;        
         require_once("views/admin.view.php");
     }
+
+    public function classes(){
+        AdminMenu::$menu='classes';
+        AdminVar::activeMenu('clases');
+        require_once('views/admin.view.php');
+    }
+    public function delete(){
+        AdminMenu::$menu='delete';
+        AdminVar::activeMenu('delete');
+        require_once('views/admin.view.php');
+    }
 }
 ?>

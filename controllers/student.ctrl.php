@@ -14,8 +14,7 @@ class StudentController{
         StudentMenu::activeMenu('mSchedule');
         return require_once('views/student.view.php');
     }
-    public function profile(){        
-        require_once 'modules/student.class.php';
+    public function profile(){                
         StudentMenu::activeMenu('profile');
         require_once('views/student.view.php');
     }
@@ -27,13 +26,18 @@ class StudentController{
         StudentProfile::$errormsg=$updateProfile->err;        
         require_once("views/student.view.php");
     }
-    public function enrollment(){
+    public function enrollment(){        
+        StudentMenu::activeMenu('enrollment');
+        require_once('views/student.view.php');
+    }
+    public function dSchedule(){        
+        StudentMenu::activeMenu('dSchedule');
+        require_once('views/student.view.php');
 
     }
-    public function dSchedule(){
-
-    }
-    public function wSchedule(){
+    public function wSchedule(){        
+        StudentMenu::activeMenu('wSchedule');
+        require_once('views/student.view.php');
 
     }
     public function mSchedule(){

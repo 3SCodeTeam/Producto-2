@@ -23,34 +23,38 @@
 
         <div id="main-container">
 
-            <?php /*INSERTAR CODIGO PHP PERFIL*///WORK IN PROGRESS
+            <?php
+            /*INSERTAR CODIGO PHP PERFIL*///WORK IN PROGRESS
                 require_once('views/admin.var.php');
                 if(AdminVar::getProfile()){
                     require_once('templates/admin/admin.profile.view.php');
                 }
-             ?>
-            <?php /*INSERTAR CODIGO PHP PROFESORES*///DONE
+            
+            /*INSERTAR CODIGO PHP PROFESORES*///DONE
                 require_once('views/admin.var.php');                
                 if(AdminVar::getTeacher()){
                     require_once('templates/admin/admin.teachers.view.php');
                 }
-             ?>
-            <?php /*INSERTAR CODIGO PHP CURSOS*///DONE
+            
+            /*INSERTAR CODIGO PHP CURSOS*///DONE
                 require_once('views/admin.var.php');                
                 if(AdminVar::getCourses()){
                     require_once('templates/admin/admin.courses.view.php');
                 }
-             ?>
-            <?php /*INSERTAR CODIGO PHP ASIGNATURAS*///TODO
+            
+            /*INSERTAR CODIGO PHP ASIGNATURAS*///TODO
                 require_once('views/admin.var.php');
                 if(AdminVar::getClasses()){
-                    require_once('templates/admin/admin.classes.view.php');
+                    //require_once('templates/admin/admin.classes.view.php');
+                    require_once('views/error.view.php');
                 }
-            ?>
-            <?php /*INSERTAR CODIGO PHP ELIMINAR*///TODO
+                
+            /*INSERTAR CODIGO PHP ELIMINAR*///TODO
                 require_once('views/admin.var.php');
                 if(AdminVar::getDelete()){
-                    require_once('templates/admin/admin.delete.view.php');
+                    //require_once('templates/admin/admin.delete.view.php');
+                    require_once('views/error.view.php');
+                    
                 }
             ?>
         </div>            
