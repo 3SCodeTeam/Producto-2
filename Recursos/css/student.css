@@ -2,7 +2,7 @@
 #main-container{
     display: block;
     font-family: Arial, Helvetica, sans-serif;
-    
+    margin-bottom: 100px;    
 }
 table{
     display:inline-table;
@@ -59,6 +59,7 @@ td{
 .form-container{
     border: solid thin black;
     padding: 1%;
+    margin-bottom: 100px;    
 }
 /*EDICIÓN DATOS PERFIL END*/
 
