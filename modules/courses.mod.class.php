@@ -54,10 +54,10 @@ class CoursesMod{
 
     public function getByAttribute($col, $val) {
         $stm = 'SELECT id_course, name, description, date_start, date_end, active FROM courses WHERE '.$col.' = ?';        
-        $sql = $this->conn->prepare($stm);
+        $sql = $this->conn->prepare($stm);        
         $sql->bind_param('s', $val);        
         $sql->execute();        
-        $res = $this->transformData($sql);        
+        $res = $this->transformData($sql);
         $sql->close();
         return $res;
     }
@@ -94,7 +94,7 @@ class CoursesMod{
     public function insertValues(string $name, string $description, string $date_start, string $date_end, int $active)
     {
         $sql = $this->conn->prepare('INSERT INTO courses (name, description, date_start, date_end, active) VALUES (?,?,?,?,?)');
-        $sql->bind_param('ssssi', $name, $description, $date_start, $date_end, $active);
+        $sql->bind_param('ssssi', $name, $description, $date_start, $date_end, $active);        
         $sql->execute();
         $res=$sql->affected_rows;
         $sql->close();

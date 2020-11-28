@@ -18,7 +18,7 @@ include_once 'includes/autoloader.inc.php';
                 return false;
             }
             $name = $this->mod->getByName($this->dataStore->name);            
-            if(!(isset($name[0]))){
+            if(!isset($name)){
                 $this->err = "Error de conexión a la base de datos.";
                 return false;
             }            

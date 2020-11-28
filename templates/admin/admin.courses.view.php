@@ -2,8 +2,15 @@
     <H2>Nuevo curso<H2>
 
     <div class="form-container">
-        <form action="http://localhost/?controller=admin&method=coursePost" method="post">
+        <form action="http://localhost/?controller=admin&method=coursePost" method="post" id="courses">
             <div class="techer-form-inputs-container">
+                <div class="curse-input option">
+                    <label for="name">Nombre del curso</label><br>
+                    <select id="active" name="active" for="courses">
+                    <option value="1" selected>Activo</option>
+                    <option value="0">Inactivo</option>
+                    </select>
+                </div>
                 <div class="curse-input">
                 <label for="name">Nombre del curso</label><br>
                 <input class="course-form-input" type="text" name="name" placeholder="Nombre del curso" required/>
