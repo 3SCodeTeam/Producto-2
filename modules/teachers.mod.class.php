@@ -11,7 +11,7 @@ class TeachersMod{
     }
 
     function transformData($res){                        
-        //SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers
+        //SELECT id_teacher, name, surname, telephone, nif, email FROM teachers
         //Ajustar las variables al orden.
         $data = array();
         $res->bind_result(            
@@ -53,7 +53,7 @@ class TeachersMod{
     }
 
     public function getByAttribute($col, $val) {
-        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE ? = ?');
+        $sql = $this->conn->prepare('SELECT id_teacher, name, surname, telephone, nif, email FROM teachers WHERE ? = ?');
         $sql->bind_param('ss', $col, $val);        
         $sql->execute();
         $res = $this->transformData($sql);
@@ -62,7 +62,7 @@ class TeachersMod{
     }
 
     public function getByAttributes($col1, $col2, $val1, $val2, string $operator) {
-        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE ? = ? ? ? = ?');
+        $sql = $this->conn->prepare('SELECT id_teacher, name, surname, telephone, nif, email FROM teachers WHERE ? = ? ? ? = ?');
         $sql->bind_param('sssss', $col1, $val1, $operator, $col2, $val2);        
         $sql->execute();
         $res = $this->transformData($sql);
@@ -74,7 +74,7 @@ class TeachersMod{
 
     public function getById(int $id){
         //return $this->getByAttribute('id_teacher',$id);
-        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE id_teacher = ?');
+        $sql = $this->conn->prepare('SELECT id_teacher, name, surname, telephone, nif, email FROM teachers WHERE id_teacher = ?');
         $sql->bind_param('s', $id);        
         $sql->execute();
         $res = $this->transformData($sql);
@@ -84,7 +84,7 @@ class TeachersMod{
 
     public function getByEmail($email){
         //return $this->getByAttribute('email',$email);
-        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE email = ?');
+        $sql = $this->conn->prepare('SELECT id_teacher, name, surname, telephone, nif, email FROM teachers WHERE email = ?');        
         $sql->bind_param('s', $email);        
         $sql->execute();
         $res = $this->transformData($sql);
@@ -94,7 +94,7 @@ class TeachersMod{
 
     public function getByNIF($nif){
         //return $this->getByAttribute('nif',$nif);
-        $sql = $this->conn->prepare('SELECT COUNT(id_teacher), id_teacher, name, surname, telephone, nif, email FROM teachers WHERE nif = ?');
+        $sql = $this->conn->prepare('SELECT id_teacher, name, surname, telephone, nif, email FROM teachers WHERE nif = ?');
         $sql->bind_param('s', $nif);        
         $sql->execute();
         $res = $this->transformData($sql);

@@ -49,7 +49,7 @@ class ListOfTeachers{
         foreach($this->teachersList as $teacher){
             echo('<tr>');
             echo('<td><span>'.utf8_encode($teacher->name).'</span></td>');
-            echo('<td><span>'.utf8_encode($teacher->surname).'</span></td>');
+            echo('<td><span>'.$teacher->surname.'</span></td>');
             echo('<td><span><a href="mailto:'.$teacher->email.'">'.$teacher->email.'</a></span></td>');            
             echo('<td><span>'.$teacher->nif.'</span></td>');
             echo('<td><span>'.$teacher->telephone.'</span></td>');
