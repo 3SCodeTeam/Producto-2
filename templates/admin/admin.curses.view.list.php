@@ -40,9 +40,11 @@ class ListOfCourses{
     }
 
     private function buildTable($status){
-        if($status){            
+        if($status){
+            echo('<div class="list-container active-courses">');            
             echo('<div class="table-title-courses">Cursos Activos</div>');
         }else{
+            echo('<div class="list-container inactive-courses">');
             echo('<div class="table-title-courses">Cursos Inactivos</div>');
         }
         
@@ -61,7 +63,7 @@ class ListOfCourses{
             echo('<td><span class="course-cell description">'.$course->description.'</span></td>');
             echo('</tr>');
         }
-        echo('</tbody></table>');                
+        echo('</tbody></table><div></div><br>');
     }
 }
 

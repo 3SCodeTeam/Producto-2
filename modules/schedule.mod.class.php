@@ -16,7 +16,7 @@ class ScheduleMod{
         $this->conn = $dbconnection->dbconn();
     }
 
-    function transformData($res){          
+    private function transformData($res){          
         $data=[];        
         //"SELECT  id_schedule, id_class, time_start, time_end, day FROM schedule'
         //Ajustar las variables al orden.
@@ -28,18 +28,16 @@ class ScheduleMod{
             $day,            
         );
         while($res->fetch()){            
-            $user = new Schedule();            
-            $user->id_schedule = $id;            
-            $user->id_class=$id_class;
-            $user->time_start=$time_start;            
-            $user->time_end=$time_end;            
-            $user->day=$day;
-            $data[] = $user;            
+            $item = new Schedule();            
+            $item->id_schedule = $id;            
+            $item->id_class=$id_class;
+            $item->time_start=$time_start;            
+            $item->time_end=$time_end;            
+            $item->day=$day;
+            $data[] = $item;            
         }        
         return $data;
     }
-        
-
     public function getAll() {
         $sql = $this->conn->prepare('SELECT  id_schedule, id_class, time_start, time_end, day FROM schedule');
         $res = $sql->execute();
@@ -68,15 +66,25 @@ class ScheduleMod{
         $sql->close();
         return $res;
     }
+    public function maxById($val){
+        $stm = "SELECT  max(id_schedule), id_class, time_start, time_end, day FROM schedule WHERE id_class = ?";
+        $sql = $this->conn->prepare($stm);
+        $sql->bind_param('s',$val);        
+        $sql->execute();
+        $res = $this->transformData($sql);
+        $sql->close();
+        return $res;
+    }
 
     public function getById(int $id) {
         return getByAttribute('id_schedule', $id);
     }
 
     public function insertValues($id_class, $time_start, $time_end, $day) {
-        $sql = $this->conn->prepare('INSERT INTO schedule(id_schedule, id_class, time_start, time_end, day) VALUES (?, ?, ?, ?, ?)');
-        $sql->bind_param('sssss', $id_class, $time_start, $time_end, $day);
-        $sql->execute();
+        $sql = $this->conn->prepare('INSERT INTO schedule (id_class, time_start, time_end, day) VALUES (?, ?, ?, ?)');
+        $sql->bind_param('ssss', $id_class, $time_start, $time_end, $day);
+        //var_dump($this->conn);
+        $sql->execute();        
         $res = $sql->affected_rows;
         $sql->close();
         return $res;

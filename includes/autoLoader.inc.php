@@ -4,6 +4,57 @@ spl_autoload_register('ctrlAutoloader');
 spl_autoload_register('classAutoloader');
 spl_autoload_register('varAutoloader');
 spl_autoload_register('classctrlAutoloader');
+spl_autoload_register('varTemplatesAutoloader');
+spl_autoload_register('allControllersLoader');
+spl_autoload_register('allModelsLoader');
+
+function allModelsLoader(){
+    $path = 'modules/';
+    $extension = '.php';
+    $models = [
+        'classes.mod.class',
+        'courses.mod.class',
+        'enrollment.mod.class',
+        'schedule.mod.class',
+        'students.mod.class',
+        'teachers.mod.class',
+        'usersAdmin.mod.class',
+        'Admin.class',
+        'class.class',
+        'courses.class',
+        'createNewValues.admin.class',
+        'dayClasses.class',
+        'DBconfig.class',
+        'DBconnection.class',
+        'DBqueries.class',
+        'enrollment.class',
+        'login.class',
+        'schedule.class',
+        'signIn.class',
+        'student.class',        
+        'teacher.class',        
+        'updateData.class',
+    ];
+
+    foreach($models as $model){
+        include_once $path.$model.$extension;
+    }
+}
+function allControllersLoader(){
+    $path = 'controllers/';
+    $extension = '.php';
+    $controllers = [
+        'admin.ctrl',
+        'logIn.ctrl',
+        'router.class',
+        'scheduleController',
+        'signin.ctrl',
+        'student.ctrl',        
+    ];
+    foreach($controllers as $controller){
+        include_once $path.$controller.$extension;
+    }
+}
 
 function modsAutoloader($className){
     $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
@@ -107,6 +158,18 @@ function varAutoloader($className){
     else{
         $path = 'views/';
     }
+
+    if(!file_exists($fullpath)){
+        return false;
+    }
+
+    require_once $fullpath ;
+}
+function varTemplatesAutoloader($className){
+    $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $path = "tamplates/admin/";
+    $extension = ".var.php";
+    $fullpath =$path.$className.$extension;
 
     if(!file_exists($fullpath)){
         return false;

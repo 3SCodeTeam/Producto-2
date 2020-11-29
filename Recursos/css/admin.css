@@ -94,12 +94,43 @@
     border: solid black;
 }
 
-
-
-
 /*COURSES ENDS*/
 
+/*CLASSES*/
+.list-classes-container{    
+    text-align: center    
+    margin: 1%;        
+}
+.list-classes-container table{    
+    display: inline-table;
+    width: 75%;
+    border: thin solid black;    
+}
+.list-classes-container td{
+    border: thin solid black;
+}
+.list-classes-container th{
+    border: solid black;
+}
 
+.form-container.courses-teachers{ 
+    margin: 3%;
+}
+
+.selector{
+    display: inline;
+    margin: 3%;
+}
+
+.form-schedule{
+    width: 100%;
+    font-size: large;
+    border: solid;
+}
+.form-schedule .col{
+    border-left: thin black solid;
+}
+/*CLASSSES END*/
 
 
 

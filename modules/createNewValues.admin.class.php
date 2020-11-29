@@ -18,7 +18,7 @@ include_once 'includes/autoloader.inc.php';
                 return false;
             }
             $name = $this->mod->getByName($this->dataStore->name);            
-            if(!(isset($name[0]))){
+            if(!isset($name)){
                 $this->err = "Error de conexión a la base de datos.";
                 return false;
             }            
@@ -41,12 +41,12 @@ include_once 'includes/autoloader.inc.php';
             if(!(isset($email)&&isset($nif))){
                 $this->err = "Error de conexión a la base de datos.";
                 return false;
-            }
-            if(!($email == 0)){
+            }            
+            if(count($email) > 0){
                 $this->err = "El email ya existe en la base de datos.";
                 return false;
             }
-            if(!($nif == 0)){
+            if(count($nif) > 0){
                 $this->err = "El NIF ya existe en la base de datos.";
                 return false;
             }
