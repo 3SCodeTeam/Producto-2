@@ -165,8 +165,8 @@ class Students{
     
     public function updateValueById($attribute, $new_value, $id){
         $stm = 'UPDATE students SET '.$attribute.' = ? WHERE id = ?';
-        $sql = $this->conn->prepare($stm);
-        $sql->bind_param('ss', $new_value, $id);
+        $sql = $this->conn->prepare($stm);        
+        $sql->bind_param('ss', $new_value, $id);        
         $sql->execute();
         $res=$sql->affected_rows;
         $sql->close();        

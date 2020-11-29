@@ -7,6 +7,10 @@ class LogInController{
     public function __construct(){
 
     }
+    public function end(){
+        @session_destroy();
+        require_once("views/login.view.php");
+    }
 
     public function new(){
         require_once("views/login.view.php");

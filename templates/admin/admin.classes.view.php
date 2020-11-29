@@ -36,7 +36,7 @@
         echo('<label for="teachers">Profesor: </label>');
         echo('<select form="courses-teachers" id="teachers" name="teachers" size=1');        
         foreach($teachers as $item){
-            echo('<option value="'.$item->id_teacher.'">'.$item->surname.', '.utf8_encode($item->name).' ('.$item->email.')</option>');
+            echo('<option value="'.$item->id_teacher.'">'.$item->surname.', '.$item->name.' ('.$item->email.')</option>');
         }
         echo('<option value="none" selected>------</option>');        
         echo('</select></div>');

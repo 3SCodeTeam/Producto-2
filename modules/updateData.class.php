@@ -152,7 +152,7 @@ class updateData{
             $this->err = "El valor propuesto y el actual son identicos.";
             return false;
         }
-        if($this->mod->updateValueById('password',$this->dataStore, $this->userId)>0){            
+        if($this->mod->updateValueById('pass',$this->dataStore, $this->userId)>0){            
             $this->err = "Contraseña actualizada.";
             return true;
         }
