@@ -89,8 +89,8 @@ class ScheduleGen{
                     echo('<td class="week col '.$d.'"><span>'.$i.'</span></td>');
                 }else{
                     echo('<td class="dow col '.$d.'">'.$this->genClassesOfDay($date, $_SESSION['sql_user_id']).'</td>');
-                }            
-            $date->add($plus1Day);
+                    $date->add($plus1Day);
+                }                        
             }
             echo('</tr>');
         }
@@ -111,13 +111,17 @@ class ScheduleGen{
     }
 
     private function genClassesOfDay($date,$id){
-        $date = $date->format("Y-m-d");
-        $res = $this->mod->getClassesOfDay($date,$id);
-        if(count($res)>0){
+        $d = $date;
+        $date = $date->format("Y-m-d");        
+        $res = $this->mod->getClassesOfDay($id, $date);        
+        if(count($res)>0){            
             foreach($res as $item){
-                echo('<div class="color-'.$item->color.' class cell"><span>'.$item->name.'</span></div>');
+               return '<div class="color-'.$item->class_color.' class cell" style="color:'.$item->class_color.';"><span>'.$item->class_name.'</span></div>';
             }
+        }else{
+            //return '<div class="empty class cell"><span>'.$d->format("d").'</span></div>';
         }
+
     }
 
     private function getFirstDate(){

@@ -33,17 +33,17 @@ class Students{
             $username,
         );
         while($res->fetch()){
-            $user = new Student();
-            $user->id = $id;
-            $user->date_registered=$date_registered;
-            $user->email=$email;
-            $user->name=$name;
-            $user->nif=$nif;
-            $user->surname=$surname;
-            $user->pass=$pass;            
-            $user->telephone=$telephone;
-            $user->username=$username;
-            $data[] = $user;            
+            $item = new Student();
+            $item->id = $id;
+            $item->date_registered=$date_registered;
+            $item->email=$email;
+            $item->name=$name;
+            $item->nif=$nif;
+            $item->surname=$surname;
+            $item->pass=$pass;            
+            $item->telephone=$telephone;
+            $item->username=$username;
+            $data[] = $item;            
         }        
         return $data;
     }
@@ -64,16 +64,17 @@ class Students{
     }
     private function transformClassData($res){
         $data=[];        
-        //"SELECT count(id), id, date_registered, email, name, nif, pass, surname, telephone, username"
+        //"SELECT S.id_class, S.day, S.time_start, S.time_end, C.name, C.color, Co.name FROM schedule as S inner JOIN class as C ON S.id_class=C.id_class
         //Ajustar las variables al orden.
         $res->bind_result(            
             $id_class,
             $class_day,
+            $class_time_start,
+            $class_time_end,
             $class_name,            
             $class_color,
-            $course_name,
-            $class_time_start,
-            $class_time_end
+            $course_name,            
+            
         );
         while($res->fetch()){
             $item = new DayClasses();
