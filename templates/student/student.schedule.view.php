@@ -66,12 +66,41 @@ class ScheduleGen{
         $fdate = new DateTime($newdateString);
         return $fdate;
     }
+    public function buildDaySchedule(){
+        $date = $this->date;
+        $col=['HORA', $date->format("d/m/Y")];
+        
+        //CUERPO DE LA TABLA
+        echo('<table class="day"><tbody>');        
+        echo('<tr>');
+
+        //CABECERA DE LA TABLA
+        foreach($col as $c){
+            echo('<th>'.$c.'</th>');
+        }        
+        echo('</tr>');        
+        
+        foreach($this->hours as $h){            
+            echo('<tr class="row day">');
+            foreach($col as $c){
+                if($c === 'HORA'){
+                    echo('<td class="dow col '.$c.'">'.$h.'</td>');
+                }else{
+                    echo('<td class="dow col '.$c.'">'.$this->getClassesByHour($date, $h, $this->id_student).'</td>');
+                }
+            }
+            echo('</tr>');
+        }
+        
+        echo('</tbody></table>');
+    }
+
     public function buildWeekSchedule(){        
         $plus1Day = new DateInterval('P1D');        
         $date = $this->getFirstDate(); //Fecha del primer día de la semana actual.
 
         //CUERPO DE LA TABLA
-        echo('<table><tbody>');        
+        echo('<table class="week"><tbody>');        
         echo('<tr>');
 
         //CABECERA DE LA TABLA
@@ -105,7 +134,7 @@ class ScheduleGen{
         $date = $this->firstDay;
 
         //CUERPO DE LA TABLA
-        echo('<table><tbody>');        
+        echo('<table class="month"><tbody>');        
         echo('<tr>');
         
         //CABECERA DE LA TABLA
@@ -149,8 +178,7 @@ class ScheduleGen{
         $res = $this->mod->getClassesOfDay($id, $date);
         if(count($res)>0){            
             foreach($res as $item){                
-                if(substr($item->time_start,0,5) == $hour){
-                    echo('IN');
+                if(substr($item->time_start,0,5) == $hour){                    
                     $string.='<div class="color-'.$item->class_color.' class cell"><span style="color: '.$item->class_color.'" >'.$item->class_name.'</span></div>';               
                 }                
             }

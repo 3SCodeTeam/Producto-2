@@ -30,8 +30,11 @@
                     $schedule = new ScheduleGen();
                     $schedule->buildWeekSchedule();
                 }
-                if(StudentMenu::$menu === 'dSchedule'){require_once('views/error.view.php');} //DIARIO
-            
+                if(StudentMenu::$menu === 'dSchedule'){
+                    require_once('templates/student/student.schedule.view.php');
+                    $schedule = new ScheduleGen();
+                    $schedule->buildDaySchedule();
+                }                               
                 /*INSERTAR CODIGO PHP PERFIL*/                 
                 if(Studentmenu::$menu ==='profile'){
                     require_once('templates/student/student.profile.view.php');                    
