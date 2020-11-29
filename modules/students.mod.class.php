@@ -60,6 +60,15 @@ class Students{
         $sql->close();
         return $res;        
     }
+    public $class_day; //Día de la semana
+    public $class_name;
+    public $class_color; //¿nombre del color?
+    public $course_name;
+    public $teacher_email;
+    public $teacher_name;
+    public $teacher_surname;
+    public $time_start;
+    public $time_end;
     private function transformClassData($res){
         $data=[];        
         //"SELECT S.id_class, S.day, S.time_start, S.time_end, C.name, C.color, Co.name FROM schedule as S inner JOIN class as C ON S.id_class=C.id_class
@@ -75,14 +84,14 @@ class Students{
             
         );
         while($res->fetch()){
-            $item = new DayClasses();
+            $item = new classesDetails();
             $item->id_class = $id_class;
             $item->class_day = $class_day;
             $item->class_name = $class_name;
             $item->class_color = $class_color;
             $item->course_name = $course_name;
-            $item->class_time_satart=$class_time_start;
-            $item->class_time_end = $class_time_end;
+            $item->time_start = $class_time_start;
+            $item->time_end = $class_time_end;
             $data[] = $item;
         }        
         return $data;

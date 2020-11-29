@@ -48,12 +48,11 @@ class ScheduleGen{
     private $currentDate;
     private $firstDay;
     private $hours = ['08:00', '09:00', '10:00', '11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'];
-    private $dow = ['SEMANA','LUNES', 'MARTES','MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];
+    private $dow = ['HORA','LUNES', 'MARTES','MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];
 
     public function __construct(){
         date_default_timezone_set('Europe/London');
-        $this->date = new DateTime(date("Y-m-d"));
-        $this->date = $this->getCurrentMonthFristDay();
+        $this->date = new DateTime(date("Y-m-d"));        
         $this->weekNum = $this->date->format("W");
         $this->firstDay = $this->getFirstDate();
         $this->mod = new Students();
@@ -67,34 +66,40 @@ class ScheduleGen{
         $fdate = new DateTime($newdateString);
         return $fdate;
     }
-    public function buildWeekSchedule(){
-        $plus1Hour = new DateInterval('PT1H');
-        $startHour = $this->hours[0];
-        $date = $this->getFirstDate();
+    public function buildWeekSchedule(){        
+        $plus1Day = new DateInterval('P1D');        
+        $date = $this->getFirstDate(); //Fecha del primer día de la semana actual.
 
         //CUERPO DE LA TABLA
         echo('<table><tbody>');        
         echo('<tr>');
 
         //CABECERA DE LA TABLA
-        foreach($dow as $d){        
-            echo('<th>'.$d.'</th>');
+        foreach($this->dow as $d){            
+            echo('<th>'.$d.'</th>');                        
         }        
         echo('</tr>');
 
         //TABLA HORARIO SEMANA
-        for($i = 0; $i < count($hours); $i++){
+        foreach($this->hours as $h){
             echo('<tr class="row week">');
-            foreach($this->dow as $d){
-                if(!$d === 'SEMANA'){
-                    echo('<td class="dow col '.$d.'">'.$this->getClassesOfDay($date, $this->id_student).'</td>');
+            foreach($this->dow as $d){                
+                if($d==='HORA'){
+                    echo('<td class="dow col '.$d.'">'.$h.'</td>');
+                }else{
+                    echo('<td class="dow col '.$d.'">'.$this->getClassesByHour($date, $h, $this->id_student).'</td>');
+                    $date->add($plus1Day);
                 }
             }
+            echo('</tr>');            
+            $date = $this->getFirstDate();
         }
-
+        //FIN TABLA
+        echo('</tbody></table>');
     }
 
-    public function builSchedule(){        
+    public function builSchedule(){
+        $this->date = $this->getCurrentMonthFristDay(); //Primer día del mes.       
         $plus1Day = new DateInterval('P1D');
         $dow = ['SEMANA','LUNES', 'MARTES','MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];        
         $date = $this->firstDay;
@@ -138,22 +143,39 @@ class ScheduleGen{
         // }
     }
 
-    private function genClassesOfDay($date,$id){
+    private function getClassesByHour($date,$hour,$id){
         $string ='';        
         $date = $date->format("Y-m-d");        
-        $res = $this->mod->getClassesOfDay($id, $date);        
+        $res = $this->mod->getClassesOfDay($id, $date);
         if(count($res)>0){            
-            foreach($res as $item){
-                $string.='<div class="color-'.$item->class_color.' class cell"><span style="color: '.htmlspecialchars($item->class_color).'" >'.$item->class_name.'</span></div>';               
+            foreach($res as $item){                
+                if(substr($item->time_start,0,5) == $hour){
+                    echo('IN');
+                    $string.='<div class="color-'.$item->class_color.' class cell"><span style="color: '.$item->class_color.'" >'.$item->class_name.'</span></div>';               
+                }                
             }
             return $string;
         }else{
             //return '<div class="empty class cell"><span>'.$d->format("d").'</span></div>';
         }
+    }
+    private function genClassesOfDay($date,$id){
+        $string ='';
+        $d=$date;
+        $date = $date->format("Y-m-d");        
+        $res = $this->mod->getClassesOfDay($id, $date);        
+        if(count($res)>0){            
+            foreach($res as $item){
+                $string.='<div class="color-'.$item->class_color.' class cell"><span style="color: '.$item->class_color.'" >'.$item->class_name.'</span></div>';               
+            }
+            return $string;
+        }else{
+            //return '<div class="empty class cell"><span>'.$d->format("d-M").'</span></div>';
+        }
 
     }
 
-    private function getFirstDate(){
+    private function getFirstDate(){//Devuelve la fecha del primer día de la semana actual.
         $date = $this->date;
         $days = 0;
         switch($this->date->format("D")){
