@@ -51,15 +51,24 @@ class ScheduleGen{
     public function __construct(){
         date_default_timezone_set('Europe/London');
         $this->date = new DateTime(date("Y-m-d"));
+        $this->date = $this->getCurrentMonthFristDay();
         $this->weekNum = $this->date->format("W");
         $this->firstDay = $this->getFirstDate();
         $this->mod = new Students();  
     }
 
+    private function getCurrentMonthFristDay(){
+        $month = $this->date->format("m");
+        $year = $this->date->format("Y");
+        $newdateString = $year.'-'.$month.'-01';
+        $fdate = new DateTime($newdateString);
+        return $fdate;
+    }
+
 
     public function builSchedule(){        
         $plus1Day = new DateInterval('P1D');
-        $dow = ['SEMANA','LUNES', 'MARTES','MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];
+        $dow = ['SEMANA','LUNES', 'MARTES','MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];        
         $date = $this->firstDay;
 
         //CUERPO DE LA TABLA
