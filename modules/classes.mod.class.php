@@ -83,7 +83,7 @@ class ClassesMod{
         if($sql){
             $sql->execute();            
         }else{
-            var_dump($this->conn);
+            //var_dump($this->conn);
         }
         $res = $this->transformDataGetByDOW($sql);        
         return $res;
@@ -133,7 +133,7 @@ class ClassesMod{
         $sql = $this->conn->prepare($stm);        
         $sql->bind_param('sssss', $id_teacher, $id_course, $id_schedule, $name, $color);        
         $sql->execute();
-        var_dump($this->conn);
+        //var_dump($this->conn);
         $res = $this->transformData($sql);
         $sql->close();
         return $res;

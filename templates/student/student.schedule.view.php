@@ -38,6 +38,7 @@ class ScheduleGen{
         date("l")
         
     */
+    private $id_student;
     private $date;
     private $weekNum;
     private $mod;
@@ -46,7 +47,8 @@ class ScheduleGen{
     private $year;
     private $currentDate;
     private $firstDay;
-    
+    private $hours = ['08:00', '09:00', '10:00', '11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'];
+    private $dow = ['SEMANA','LUNES', 'MARTES','MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];
 
     public function __construct(){
         date_default_timezone_set('Europe/London');
@@ -54,7 +56,8 @@ class ScheduleGen{
         $this->date = $this->getCurrentMonthFristDay();
         $this->weekNum = $this->date->format("W");
         $this->firstDay = $this->getFirstDate();
-        $this->mod = new Students();  
+        $this->mod = new Students();
+        $this->id_student = $_SESSION['sql_user_id'];
     }
 
     private function getCurrentMonthFristDay(){
@@ -64,7 +67,32 @@ class ScheduleGen{
         $fdate = new DateTime($newdateString);
         return $fdate;
     }
+    public function buildWeekSchedule(){
+        $plus1Hour = new DateInterval('PT1H');
+        $startHour = $this->hours[0];
+        $date = $this->getFirstDate();
 
+        //CUERPO DE LA TABLA
+        echo('<table><tbody>');        
+        echo('<tr>');
+
+        //CABECERA DE LA TABLA
+        foreach($dow as $d){        
+            echo('<th>'.$d.'</th>');
+        }        
+        echo('</tr>');
+
+        //TABLA HORARIO SEMANA
+        for($i = 0; $i < count($hours); $i++){
+            echo('<tr class="row week">');
+            foreach($this->dow as $d){
+                if(!$d === 'SEMANA'){
+                    echo('<td class="dow col '.$d.'">'.$this->getClassesOfDay($date, $this->id_student).'</td>');
+                }
+            }
+        }
+
+    }
 
     public function builSchedule(){        
         $plus1Day = new DateInterval('P1D');
@@ -111,13 +139,14 @@ class ScheduleGen{
     }
 
     private function genClassesOfDay($date,$id){
-        $d = $date;
+        $string ='';        
         $date = $date->format("Y-m-d");        
         $res = $this->mod->getClassesOfDay($id, $date);        
         if(count($res)>0){            
             foreach($res as $item){
-               return '<div class="color-'.$item->class_color.' class cell" style="color:'.$item->class_color.';"><span>'.$item->class_name.'</span></div>';
+                $string.='<div class="color-'.$item->class_color.' class cell"><span style="color: '.htmlspecialchars($item->class_color).'" >'.$item->class_name.'</span></div>';               
             }
+            return $string;
         }else{
             //return '<div class="empty class cell"><span>'.$d->format("d").'</span></div>';
         }

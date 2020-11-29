@@ -52,11 +52,9 @@ class Students{
 
     public function getClassesOfDay($id, $date){
         $stm = 'SELECT S.id_class, S.day, S.time_start, S.time_end, C.name, C.color, Co.name FROM schedule as S inner JOIN class as C ON S.id_class=C.id_class INNER JOIN courses as Co ON C.id_course = Co.id_course
-        WHERE Co.id_course IN (SELECT id_course FROM enrollment WHERE id_student = ?) and S.day = ?';
-        $sql = $this->conn->prepare($stm);
-        //var_dump($this->conn);
-        $sql->bind_param('ss', $id, $date);
-        //var_dump($sql);
+        WHERE Co.id_course IN (SELECT id_course FROM enrollment WHERE id_student = ?) and S.day =? ORDER BY S.day, S.time_start';
+        $sql = $this->conn->prepare($stm);        
+        $sql->bind_param('ss', $id, $date);        
         $sql->execute();
         $res=$this->transformClassData($sql);
         $sql->close();

@@ -82,7 +82,7 @@ class AdminController{
     public function PostClassInit(){
         //var_dump($_POST);
         if(!($_POST['teachers'] === 'none' || !$_POST['courses']=== 'none')){
-            var_dump($_POST);
+            //var_dump($_POST);
             $selectedTeacherId = $_POST['teachers'];
             $selectedCourseID = $_POST['courses'];
 
@@ -147,7 +147,7 @@ class AdminController{
                     $start->add($plus1Day);
                 }
                 $res = $mod->maxById($id_class);
-                var_dump($res);
+                //var_dump($res);
                 $mod = new ClassesMod();
                 $mod->updateValueById('id_schedule', $res[0]->id_schedule, $id_class);
 
