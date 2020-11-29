@@ -90,7 +90,7 @@ class ScheduleGen{
         
         //LEYENDA
         echo('<br>'.'<br>');
-        $this->leyendaDam();
+        $this->leyenda();
 
         // $student = new student;
         // if ($student.course == 1){
@@ -130,32 +130,59 @@ class ScheduleGen{
         return new DateInterval('P'.$numOfDays.'D');
     }
 
+      
+    // Funcion mostrar LEYENDA universal
+    function leyenda(){
+        $clases = [];
+        $clases[0] = '<t style="color:#ff0000;">Programacion</t>';
+        $clases[1] = '<t style="color:#ffcc00;">Bases de datos</t>';
+        $clases[2] = '<t style="color:#00ff00;">Diseño grafico</t>';
+        $clases[3] = '<t style="color:#00ccff;">Aplicaciones escritorio</t>';
+        $clases[4] = '<t style="color:#9900ff;">Aplicaciones web</t>';
+        echo '<table><td><strong>Clases DAW:</strong></td></table>';
+        echo('<br>'.'<br>');
+        $array = implode('<br>', $clases);
+        echo $array;
+        echo('<br>'.'<br>');
+
+        $clases = [];
+        $clases[0] = '<t style="color:#ff0000;">Programacion</t>';
+        $clases[1] = '<t style="color:#ffcc00;">Bases de datos</t>';
+        $clases[2] = '<t style="color:#00ff00;">Ciberseguridad</t>';
+        $clases[3] = '<t style="color:#00ccff;">Aplicaciones escritorio</t>';
+        $clases[4] = '<t style="color:#9900ff;">Aplicaciones moviles</t>';
+        echo '<table><td><strong>Clases DAM:</strong></td></table>';
+        echo('<br>'.'<br>');
+        $array = implode('<br>', $clases);
+        echo $array;
+    }
+    
     // Funcion mostrar LEYENDA DAW
     function leyendaDaw(){
-    $clases = [];
-    $clases[0] = '<t style="color:#ff0000;">Programacion</t>';
-    $clases[1] = '<t style="color:#ffcc00;">Bases de datos</t>';
-    $clases[2] = '<t style="color:#00ff00;">Diseño grafico</t>';
-    $clases[3] = '<t style="color:#00ccff;">Aplicaciones escritorio</t>';
-    $clases[4] = '<t style="color:#9900ff;">Aplicaciones web</t>';
-    echo '<table><td><strong>Clases:</strong></td></table>';
-    echo('<br>'.'<br>');
-    $array = implode('<br>', $clases);
-    echo $array;
+        $clases = [];
+        $clases[0] = '<t style="color:#ff0000;">Programacion</t>';
+        $clases[1] = '<t style="color:#ffcc00;">Bases de datos</t>';
+        $clases[2] = '<t style="color:#00ff00;">Diseño grafico</t>';
+        $clases[3] = '<t style="color:#00ccff;">Aplicaciones escritorio</t>';
+        $clases[4] = '<t style="color:#9900ff;">Aplicaciones web</t>';
+        echo '<table><td><strong>Clases:</strong></td></table>';
+        echo('<br>'.'<br>');
+        $array = implode('<br>', $clases);
+        echo $array;
     }
 
     // Funcion mostrar LEYENDA DAM
     function leyendaDam(){
-    $clases = [];
-    $clases[0] = '<t style="color:#ff0000;">Programacion</t>';
-    $clases[1] = '<t style="color:#ffcc00;">Bases de datos</t>';
-    $clases[2] = '<t style="color:#00ff00;">Ciberseguridad</t>';
-    $clases[3] = '<t style="color:#00ccff;">Aplicaciones escritorio</t>';
-    $clases[4] = '<t style="color:#9900ff;">Aplicaciones moviles</t>';
-    echo '<table><td><strong>Clases:</strong></td></table>';
-    echo('<br>'.'<br>');
-    $array = implode('<br>', $clases);
-    echo $array;
+        $clases = [];
+        $clases[0] = '<t style="color:#ff0000;">Programacion</t>';
+        $clases[1] = '<t style="color:#ffcc00;">Bases de datos</t>';
+        $clases[2] = '<t style="color:#00ff00;">Ciberseguridad</t>';
+        $clases[3] = '<t style="color:#00ccff;">Aplicaciones escritorio</t>';
+        $clases[4] = '<t style="color:#9900ff;">Aplicaciones moviles</t>';
+        echo '<table><td><strong>Clases:</strong></td></table>';
+        echo('<br>'.'<br>');
+        $array = implode('<br>', $clases);
+        echo $array;
     }
 }
 
