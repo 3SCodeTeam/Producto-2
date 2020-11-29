@@ -34,6 +34,7 @@ function allModelsLoader(){
         'student.class',        
         'teacher.class',        
         'updateData.class',
+        'enrollStudent.class',
     ];
 
     foreach($models as $model){

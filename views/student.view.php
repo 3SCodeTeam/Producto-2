@@ -34,7 +34,9 @@
                 }
             
                 /*INSERTAR CODIGO PHP MATRICULA*/ 
-                if(StudentMenu::$menu === 'enrollment'){require_once('views/error.view.php');}
+                if(StudentMenu::$menu === 'enrollment'){
+                    require_once('templates/student/student.enrollment.view.php');
+                }
             ?>
         </div>            
 
