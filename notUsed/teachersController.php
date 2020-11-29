@@ -1,5 +1,5 @@
 <?php
-
+include_once 'includes/autoLoader.inc.php';
 class teachersController extends teachers {
 
     // Funcion INSERT query

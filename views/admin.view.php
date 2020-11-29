@@ -45,8 +45,8 @@
             /*INSERTAR CODIGO PHP ASIGNATURAS*///TODO
                 require_once('views/admin.var.php');
                 if(AdminVar::getClasses()){
-                    //require_once('templates/admin/admin.classes.view.php');
-                    require_once('views/error.view.php');
+                    require_once('templates/admin/admin.classes.view.php');
+                    //require_once('views/error.view.php');
                 }
                 
             /*INSERTAR CODIGO PHP ELIMINAR*///TODO

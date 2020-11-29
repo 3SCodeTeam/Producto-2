@@ -1,9 +1,8 @@
 <?php
 include_once 'includes/autoloader.inc.php';
-
+//ESTA CLASE ES LA MISMA QUE <SCHEDULE class="CLASS PHP"></SCHEDULE>
 class Classes{   
     
-    public $count;
     public $color;
     public $id_class;
     public $id_course;
